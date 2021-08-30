@@ -6,7 +6,8 @@ using System.Web;
 
 namespace EduMax.Repository
 {
-    public class TeacherRepository : Repository<Teacher>
+    public class UserRepository : Repository<User>
     {
+
     }
 }

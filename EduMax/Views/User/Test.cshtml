@@ -1,0 +1,201 @@
+﻿@model IEnumerable<EduMax.Models.Course>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body style="background-image: url('https://i.pinimg.com/originals/fa/4c/9c/fa4c9c3d190ff50c4900abeb26ecf5ea.jpg') ">
+
+    <div class="container">
+        <h2>Card Image</h2>
+        <p>Image at the top (card-img-top):</p>
+        <div class="card" style="width:400px">
+            <img class="card-img-top" src="img_avatar1.png" alt="Card image" style="width:100%">
+            <div class="card-body">
+                <h4 class="card-title">John Doe</h4>
+                <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+        </div>
+        <br>
+
+        <p>Image at the bottom (card-img-bottom):</p>
+        <div class="card" style="width:400px">
+            <div class="card-body">
+                <h4 class="card-title">Jane Doe</h4>
+                <p class="card-text">Some example text some example text. Jane Doe is an architect and engineer</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+            <img class="card-img-bottom" src="img_avatar6.png" alt="Card image" style="width:100%">
+        </div>
+
+        <div class="container" style="background-color: snow">
+            <h2>Card Image</h2>
+            <p>Image at the top (card-img-top):</p>
+            <div class="card" style="width:400px">
+                <img class="card-img-top" src="img_avatar1.png" alt="Card image" style="width:100%">
+                <div class="card-body">
+                    <h4 class="card-title">John Doe</h4>
+                    <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                    <a href="#" class="btn btn-primary">See Profile</a>
+                </div>
+            </div>
+            <br>
+
+            <div class="container">
+                <h2>Card Image</h2>
+                <p>Image at the top (card-img-top):</p>
+                <div class="card" style="width:400px">
+                    <img class="card-img-top" src="img_avatar1.png" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                        <h4 class="card-title">John Doe</h4>
+                        <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                        <a href="#" class="btn btn-primary">See Profile</a>
+                    </div>
+                </div>
+                <br>
+
+                <p>Image at the bottom (card-img-bottom):</p>
+                <div class="card" style="width:400px">
+                    <div class="card-body">
+                        <h4 class="card-title">Jane Doe</h4>
+                        <p class="card-text">Some example text some example text. Jane Doe is an architect and engineer</p>
+                        <a href="#" class="btn btn-primary">See Profile</a>
+                    </div>
+                    <img class="card-img-bottom" src="img_avatar6.png" alt="Card image" style="width:100%">
+                </div>
+
+                <div class="container">
+                    <h2>Card Image</h2>
+                    <p>Image at the top (card-img-top):</p>
+                    <div class="card" style="width:400px">
+                        <img class="card-img-top" src="img_avatar1.png" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">John Doe</h4>
+                            <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                            <a href="#" class="btn btn-primary">See Profile</a>
+                        </div>
+                    </div>
+                    <br>
+
+                    <p>Image at the bottom (card-img-bottom):</p>
+                    <div class="card" style="width:400px">
+                        <div class="card-body">
+                            <h4 class="card-title">Jane Doe</h4>
+                            <p class="card-text">Some example text some example text. Jane Doe is an architect and engineer</p>
+                            <a href="#" class="btn btn-primary">See Profile</a>
+                        </div>
+                        <img class="card-img-bottom" src="img_avatar6.png" alt="Card image" style="width:100%">
+                    </div>
+
+                    <p>Image at the bottom (card-img-bottom):</p>
+                    <div class="card" style="width:400px">
+                        <div class="card-body">
+                            <h4 class="card-title">Jane Doe</h4>
+                            <p class="card-text">Some example text some example text. Jane Doe is an architect and engineer</p>
+                            <a href="#" class="btn btn-primary">See Profile</a>
+                        </div>
+                        <img class="card-img-bottom" src="img_avatar6.png" alt="Card image" style="width:100%">
+                    </div>
+
+                    @foreach (var item in Model)
+                    {
+                        if(item.Status == "1") { 
+                            <a href="#" style="text-decoration:none; color:black">
+                                <div class="card-deck">
+                                    <div class="card mb-4" >
+                                        @if (item.CoursePhoto != null)
+                                        {
+                                            <img class="img-circle" src="@Url.Content(item.CoursePhoto)" alt="" height="150" width="200" />
+                                        }
+                                    <div class="card-body">
+                                        <h4 class="card-title text-info" style="color:black">@item.CourseName</h4>
+                                        <p>Some example text some example text. Jane Doe is an architect and engineer</p>
+                                        <p style="color:forestgreen">Category: <strong style="color:black">@item.Category.CategoryName</strong></p>
+                                        <strong>@item.User.Name <br /></strong>
+                                        <p class="text-muted">@item.Date.Day/@item.Date.Month/@item.Date.Year</p>
+
+                                        <a href="#" class="btn btn-primary">See Profile</a>
+                                    </div>
+                                    </div>
+                                    <img class="card-img-bottom" src="img_avatar6.png" alt="Card image" style="width:100%">
+                                </div>
+                            </a>
+                        }
+                        
+                    }
+
+                    <table class="container">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CourseName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Date)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CoursePhoto)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CategoryId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UserId)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CourseName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Date)
+                                </td>
+                                <td>
+                                    @*@Html.DisplayFor(modelItem => item.CoursePhoto)*@
+                                    @if (item.CoursePhoto != null)
+                                    {
+                                        <img src="@Url.Content(item.CoursePhoto)" alt="" height="150" width="200" />
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserId)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.CourseId }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.CourseId }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.CourseId })
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+
+
+</body>
+</html>

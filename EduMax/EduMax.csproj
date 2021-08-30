@@ -132,7 +132,7 @@
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\CredentialController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -144,16 +144,81 @@
     <Compile Include="Migrations\202105291702132_EduMaxDbChange.designer.cs">
       <DependentUpon>202105291702132_EduMaxDbChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107241903181_change_relation_in_Teacher_table.cs" />
+    <Compile Include="Migrations\202107241903181_change_relation_in_Teacher_table.designer.cs">
+      <DependentUpon>202107241903181_change_relation_in_Teacher_table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107241918040_change_relation_in_Teacher_2_table.cs" />
+    <Compile Include="Migrations\202107241918040_change_relation_in_Teacher_2_table.designer.cs">
+      <DependentUpon>202107241918040_change_relation_in_Teacher_2_table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107241944031_change_relation_in_Teacher_3.cs" />
+    <Compile Include="Migrations\202107241944031_change_relation_in_Teacher_3.designer.cs">
+      <DependentUpon>202107241944031_change_relation_in_Teacher_3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107241958187_change_relation_in_Teacher_4.cs" />
+    <Compile Include="Migrations\202107241958187_change_relation_in_Teacher_4.designer.cs">
+      <DependentUpon>202107241958187_change_relation_in_Teacher_4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107242004409_change_relation_in_Student.cs" />
+    <Compile Include="Migrations\202107242004409_change_relation_in_Student.designer.cs">
+      <DependentUpon>202107242004409_change_relation_in_Student.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107242006599_change_relation_in_Teacher_5.cs" />
+    <Compile Include="Migrations\202107242006599_change_relation_in_Teacher_5.designer.cs">
+      <DependentUpon>202107242006599_change_relation_in_Teacher_5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107242016080_dropPrimaryKeyClomun_Teacher.cs" />
+    <Compile Include="Migrations\202107242016080_dropPrimaryKeyClomun_Teacher.designer.cs">
+      <DependentUpon>202107242016080_dropPrimaryKeyClomun_Teacher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108241335474_new_table_StudentCourse.cs" />
+    <Compile Include="Migrations\202108241335474_new_table_StudentCourse.designer.cs">
+      <DependentUpon>202108241335474_new_table_StudentCourse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108241506529_StudentCourse_Updated.cs" />
+    <Compile Include="Migrations\202108241506529_StudentCourse_Updated.designer.cs">
+      <DependentUpon>202108241506529_StudentCourse_Updated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108241535187_TeacherTable_nameChangend_To_User.cs" />
+    <Compile Include="Migrations\202108241535187_TeacherTable_nameChangend_To_User.designer.cs">
+      <DependentUpon>202108241535187_TeacherTable_nameChangend_To_User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108251415060_Course_Updated.cs" />
+    <Compile Include="Migrations\202108251415060_Course_Updated.designer.cs">
+      <DependentUpon>202108251415060_Course_Updated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108251418092_Course_Updated2.cs" />
+    <Compile Include="Migrations\202108251418092_Course_Updated2.designer.cs">
+      <DependentUpon>202108251418092_Course_Updated2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108271403182_Course_PK_AutoIncrement.cs" />
+    <Compile Include="Migrations\202108271403182_Course_PK_AutoIncrement.designer.cs">
+      <DependentUpon>202108271403182_Course_PK_AutoIncrement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108271407549_PK_Inc.cs" />
+    <Compile Include="Migrations\202108271407549_PK_Inc.designer.cs">
+      <DependentUpon>202108271407549_PK_Inc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108271412393_PK_Inc2.cs" />
+    <Compile Include="Migrations\202108271412393_PK_Inc2.designer.cs">
+      <DependentUpon>202108271412393_PK_Inc2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202108271424129_User_Table.cs" />
+    <Compile Include="Migrations\202108271424129_User_Table.designer.cs">
+      <DependentUpon>202108271424129_User_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Assignment.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\StudentCourse.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Credential.cs" />
     <Compile Include="Models\EduMaxDbContext.cs" />
     <Compile Include="Models\Lecture.cs" />
     <Compile Include="Models\Student.cs" />
-    <Compile Include="Models\Teacher.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\CourseRepository.cs" />
@@ -161,7 +226,7 @@
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\StudentRepository.cs" />
-    <Compile Include="Repository\TeacherRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -204,11 +269,13 @@
     <Content Include="Views\Credential\Index.cshtml" />
     <Content Include="Views\Category\Create.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
-    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Course\Create.cshtml" />
+    <Content Include="Views\User\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\CourseImage\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +297,54 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105291702132_EduMaxDbChange.resx">
       <DependentUpon>202105291702132_EduMaxDbChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107241903181_change_relation_in_Teacher_table.resx">
+      <DependentUpon>202107241903181_change_relation_in_Teacher_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107241918040_change_relation_in_Teacher_2_table.resx">
+      <DependentUpon>202107241918040_change_relation_in_Teacher_2_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107241944031_change_relation_in_Teacher_3.resx">
+      <DependentUpon>202107241944031_change_relation_in_Teacher_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107241958187_change_relation_in_Teacher_4.resx">
+      <DependentUpon>202107241958187_change_relation_in_Teacher_4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107242004409_change_relation_in_Student.resx">
+      <DependentUpon>202107242004409_change_relation_in_Student.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107242006599_change_relation_in_Teacher_5.resx">
+      <DependentUpon>202107242006599_change_relation_in_Teacher_5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107242016080_dropPrimaryKeyClomun_Teacher.resx">
+      <DependentUpon>202107242016080_dropPrimaryKeyClomun_Teacher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108241335474_new_table_StudentCourse.resx">
+      <DependentUpon>202108241335474_new_table_StudentCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108241506529_StudentCourse_Updated.resx">
+      <DependentUpon>202108241506529_StudentCourse_Updated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108241535187_TeacherTable_nameChangend_To_User.resx">
+      <DependentUpon>202108241535187_TeacherTable_nameChangend_To_User.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108251415060_Course_Updated.resx">
+      <DependentUpon>202108251415060_Course_Updated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108251418092_Course_Updated2.resx">
+      <DependentUpon>202108251418092_Course_Updated2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108271403182_Course_PK_AutoIncrement.resx">
+      <DependentUpon>202108271403182_Course_PK_AutoIncrement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108271407549_PK_Inc.resx">
+      <DependentUpon>202108271407549_PK_Inc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108271412393_PK_Inc2.resx">
+      <DependentUpon>202108271412393_PK_Inc2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108271424129_User_Table.resx">
+      <DependentUpon>202108271424129_User_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

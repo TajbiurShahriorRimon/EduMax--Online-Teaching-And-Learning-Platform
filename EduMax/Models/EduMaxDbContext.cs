@@ -16,7 +16,7 @@ namespace EduMax.Models
             Database.SetInitializer<EduMaxDbContext>(new MigrateDatabaseToLatestVersion<EduMaxDbContext, Configuration>());
         }
 
-        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Course> Courses { get; set; }
@@ -24,6 +24,7 @@ namespace EduMax.Models
         public DbSet<Assignment> Assignments { get; set; }
         public DbSet<Lecture> Lectures { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<StudentCourse> StudentCourses { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -16,6 +16,7 @@ namespace EduMax.Models
         }
 
         [ForeignKey("Credential")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int StudentId { get; set; }
         [Required]
         public string Name { get; set; }

@@ -8,6 +8,11 @@ namespace EduMax.Repository
 {
     public class CredentialRepository : Repository<Credential>
     {
+        public void Register(Credential credential)
+        {
+
+        }
+
         public Credential CheckForLogin(Credential credential)
         {
             Credential userLogin = context.Credentials.SqlQuery("Select * from Credentials where email = '"+credential.Email+"' and password = '" +credential.Password+"'").FirstOrDefault();

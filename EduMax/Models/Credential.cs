@@ -16,7 +16,7 @@ namespace EduMax.Models
         public string UserType { get; set; }
 
         public virtual Admin Admin { get; set; }
-        public virtual Teacher Teacher { get; set; }
+        public virtual User User { get; set; }
         public virtual Student Student { get; set; }
     }
 }

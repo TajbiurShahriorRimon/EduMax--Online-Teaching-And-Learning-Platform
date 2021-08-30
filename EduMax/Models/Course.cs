@@ -26,8 +26,9 @@ namespace EduMax.Models
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
 
-        public int TeacherId { get; set; }
-        public virtual Teacher Teacher { get; set; }
+        [Required]
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
 
         public virtual List<Lecture> Lectures { get; set; }
         public virtual List<Assignment> Assignments { get; set; }
