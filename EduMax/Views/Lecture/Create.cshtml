@@ -1,0 +1,80 @@
+﻿@model EduMax.Models.Lecture
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "Lecture", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Lecture</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.LectureName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LectureName, "Lecture Name", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LectureName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.File, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="File" class="form-control" />
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.CourseId, "Course", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select class="form-control" name="CourseId">
+                        @foreach (var item in ViewData["courseList"] as IList<EduMax.Models.Course>)
+                        {
+                            <option value="@item.CourseId">
+                                @item.CourseName
+                            </option>
+                        }
+                    </select>
+                    @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" name="addOneLectureBtn" class="btn btn-default" />                
+            </div>
+        </div>
+    </div>
+    if (Session["addLectureForCreatingCourse"] == null)
+    {
+        <div align="center"><h2>Nothing Added Yet</h2></div>        
+    }
+    else
+    {
+        <table align="center">
+            <tr>
+                <td>Name</td>
+            </tr>
+            @foreach (var item in Session["addLectureForCreatingCourse"] as IList<EduMax.Models.Lecture>)
+            {
+                <tr>
+                    <td>@item.LectureName</td>
+                </tr>
+            }
+            <tr>
+                <td><input type="submit" value="Done" name="createCourseWithLecturesBtn" class="btn btn-default" /></td>
+            </tr>
+        </table>
+    }
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

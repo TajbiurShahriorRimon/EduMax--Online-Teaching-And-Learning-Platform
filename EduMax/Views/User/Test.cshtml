@@ -19,6 +19,14 @@
 <body style="background-image: url('https://i.pinimg.com/originals/fa/4c/9c/fa4c9c3d190ff50c4900abeb26ecf5ea.jpg') ">
 
     <div class="container">
+        <ul>
+            <li>
+                <a href="/Course/Create" class="navbar-link">Create Course</a>
+                <a href="/Lecture/Create" class="navbar-btn">Create Lecture</a>
+                <a href="/Home/LogOut" class="navbar-btn">Log Out</a>
+            </li>
+        </ul>
+
         <h2>Card Image</h2>
         <p>Image at the top (card-img-top):</p>
         <div class="card" style="width:400px">
@@ -112,29 +120,30 @@
 
                     @foreach (var item in Model)
                     {
-                        if(item.Status == "1") { 
+                        if (item.Status == "1")
+                        {
                             <a href="#" style="text-decoration:none; color:black">
                                 <div class="card-deck">
-                                    <div class="card mb-4" >
+                                    <div class="card mb-4">
                                         @if (item.CoursePhoto != null)
                                         {
                                             <img class="img-circle" src="@Url.Content(item.CoursePhoto)" alt="" height="150" width="200" />
                                         }
-                                    <div class="card-body">
-                                        <h4 class="card-title text-info" style="color:black">@item.CourseName</h4>
-                                        <p>Some example text some example text. Jane Doe is an architect and engineer</p>
-                                        <p style="color:forestgreen">Category: <strong style="color:black">@item.Category.CategoryName</strong></p>
-                                        <strong>@item.User.Name <br /></strong>
-                                        <p class="text-muted">@item.Date.Day/@item.Date.Month/@item.Date.Year</p>
+                                        <div class="card-body">
+                                            <h4 class="card-title text-info" style="color:black">@item.CourseName</h4>
+                                            <p>Some example text some example text. Jane Doe is an architect and engineer</p>
+                                            <p style="color:forestgreen">Category: <strong style="color:black">@item.Category.CategoryName</strong></p>
+                                            <strong>@item.User.Name <br /></strong>
+                                            <p class="text-muted">@item.Date.Day/@item.Date.Month/@item.Date.Year</p>
 
-                                        <a href="#" class="btn btn-primary">See Profile</a>
-                                    </div>
+                                            <a href="#" class="btn btn-primary">See Profile</a>
+                                        </div>
                                     </div>
                                     <img class="card-img-bottom" src="img_avatar6.png" alt="Card image" style="width:100%">
                                 </div>
                             </a>
                         }
-                        
+
                     }
 
                     <table class="container">

@@ -77,3 +77,5 @@ D:\Project\EduMax\obj\Debug\EduMax.Migrations.Course_PK_AutoIncrement.resources
 D:\Project\EduMax\obj\Debug\EduMax.Migrations.PK_Inc.resources
 D:\Project\EduMax\obj\Debug\EduMax.Migrations.PK_Inc2.resources
 D:\Project\EduMax\obj\Debug\EduMax.Migrations.User_Table.resources
+D:\Project\EduMax\obj\Debug\EduMax.Migrations.Lecture_Assignment_updated.resources
+D:\Project\EduMax\obj\Debug\EduMax.Migrations.Assignment_updated.resources
