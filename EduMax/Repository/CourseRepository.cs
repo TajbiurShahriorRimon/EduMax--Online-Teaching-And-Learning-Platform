@@ -13,5 +13,13 @@ namespace EduMax.Repository
             Course course = context.Courses.SqlQuery("select Top 1 * from courses order by courseId desc").FirstOrDefault();
             return course.CourseId;
         }
+
+        /*When user searches for a course the course will be retrieved by searching the course name*/
+        public List<Course> SearchCourseByString(string searchCourse)
+        {
+            string query = $"select * from courses where status = '1' and courseName Like '%{searchCourse}%'";
+            List<Course> courses = context.Courses.SqlQuery(query).ToList();
+            return courses;
+        }
     }
 }

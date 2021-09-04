@@ -11,6 +11,7 @@ namespace EduMax.Controllers
 {
     public class CourseController : Controller
     {
+        EduMaxDbContext context = new EduMaxDbContext();
         // GET: Course
         public ActionResult Index()
         {
@@ -79,6 +80,14 @@ namespace EduMax.Controllers
 
             //After inserting the course into the database, it is time to store lectures into the database. Therefore it is redirected
             return RedirectToAction("InsertLectures", "Lecture");
+        }
+
+        public ActionResult SearchCourse(string searchCourse)
+        {
+            //When user search for a course using the search bar, first from javascript file it will be checked whether the
+            //the search string is empty or not. If it is empty, the js function will return false; else this method wlll be executed
+            //and the following line will be exectued.
+            return RedirectToAction("Index", "User", new{ searchCourse });
         }
     }
 }

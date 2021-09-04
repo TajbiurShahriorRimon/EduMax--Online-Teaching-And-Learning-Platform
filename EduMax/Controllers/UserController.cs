@@ -11,9 +11,19 @@ namespace EduMax.Controllers
     public class UserController : Controller
     {
         // GET: Teacher
-        public ActionResult Index()
+        //by default it is assigned null. If any value is passes then value will be assgined to the parameter
+        public ActionResult Index(string searchCourse = null)
         {
-            //return View(new CourseRepository().GetAll());
+            /*Checks if the parameter consists a value or not.*/
+            if(searchCourse != null)
+            {
+                /*When a user searches for a course, the value will be stored in the viewbag which is used to pass data to the
+                 search bar and which wil be displayed*/
+                ViewBag.courseSearchQuery = searchCourse;
+                /*In the same page the course will be loaded when user searches for a course.*/
+                return View("Test", new CourseRepository().SearchCourseByString(searchCourse));
+            }
+            //The following line takes to the default view of course list. That is the "home page"
             return View("Test", new CourseRepository().GetAll());
         }
 
