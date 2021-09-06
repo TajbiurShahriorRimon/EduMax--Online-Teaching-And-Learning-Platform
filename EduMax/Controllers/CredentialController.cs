@@ -72,7 +72,7 @@ namespace EduMax.Controllers
                 Session["user_type"] = user.UserType.ToString();
                 Session["credential_id"] = user.CredentialId;
 
-                if (user.UserType == "Teacher")
+                if (user.UserType == "Teacher" || user.UserType == "Admin")
                 {
                     return RedirectToAction("Index", "User");
                 }

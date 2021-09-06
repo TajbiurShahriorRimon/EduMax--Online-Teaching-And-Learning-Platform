@@ -1,0 +1,67 @@
+﻿@model IEnumerable<EduMax.Models.User>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UserList</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Credential.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    @*Admin can check the user list. Howver admin will not see his name in the user list*@
+    @foreach (var item in Model) {
+        if (item.Credential.UserType != "Admin")
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Credential.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                @if (item.Status == "0")
+                {
+                <td>
+                    Inactive
+                </td>
+                }
+                else
+                {
+                <td>
+                    Active
+                </td>
+                }
+
+                @*<td>
+                    @Html.ActionLink("D", "Delete", new { id=item.UserId })
+                </td>*@
+                <td>
+                    <a href="/User/UserDetails?id=@item.UserId">Check Profile</a>
+                </td>
+            </tr>
+        }
+    }
+
+    </table>
+</body>
+</html>

@@ -1,0 +1,68 @@
+﻿@model EduMax.Models.User
+
+@{
+    ViewBag.Title = "User Details";
+}
+
+<h2>User Details</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <form method="post">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Credential.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Credential.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Institution)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Institution)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        @if (Model.Status == "1")
+        {
+        <dd>
+            Active &nbsp;&nbsp; <a href="/User/ChangeStatus?id=@Model.UserId">Change Status</a>
+        </dd>
+        }
+        else
+        {
+        <dd>
+            Inactive &nbsp;&nbsp; <a href="/User/ChangeStatus?id=@Model.UserId">Change Status</a>
+        </dd>
+        }
+
+    </dl>
+    </form>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "AllUsers")
+</p>

@@ -284,6 +284,8 @@
     <Content Include="Views\Course\Create.cshtml" />
     <Content Include="Views\User\Test.cshtml" />
     <Content Include="Views\Lecture\Create.cshtml" />
+    <Content Include="Views\User\UserList.cshtml" />
+    <Content Include="Views\User\UserDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

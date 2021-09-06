@@ -27,6 +27,10 @@
             <li>
                 <a href="/Course/Create" class="navbar-link">Create Course</a>
                 <a href="/Lecture/Create" class="navbar-btn">Create Lecture</a>
+                @if(Session["user_type"].ToString() == "Admin")
+                {
+                    <a href="/User/AllUsers" class="navbar-btn">Users</a>
+                }
                 <a href="/Home/LogOut" class="navbar-btn">Log Out</a>
             </li>
         </ul>

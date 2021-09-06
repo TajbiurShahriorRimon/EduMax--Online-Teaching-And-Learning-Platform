@@ -10,6 +10,7 @@ namespace EduMax.Controllers
 {
     public class UserController : Controller
     {
+        public UserRepository userRepository = new UserRepository();
         // GET: Teacher
         //by default it is assigned null. If any value is passes then value will be assgined to the parameter
         public ActionResult Index(string searchCourse = null)
@@ -29,6 +30,11 @@ namespace EduMax.Controllers
 
         public ActionResult Create()
         {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             User user = new User();
             user.Name = TempData["tempName"].ToString();
             user.Date = DateTime.Now;
@@ -46,6 +52,52 @@ namespace EduMax.Controllers
 
             return Content("Created");
 
+        }
+
+        public ActionResult AllUsers()
+        {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            return View("UserList", new UserRepository().GetAll());
+        }
+        
+        public ActionResult UserDetails(int id)
+        {
+            return View("UserDetails", this.userRepository.Get(id));
+        }
+
+        public ActionResult ChangeStatus(int id)
+        {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }            
+
+            /*Finding the user using the user id*/
+            User user = this.userRepository.Get(id);
+
+            /*After Finding the user, the user status is checked. If status is "0" which is "Inactive", User Status will become
+             "Active" which is "1", after clicking the button to change user status*/
+            if (user.Status == "0")
+            {
+                //User status is set to "1", which is "Active" 
+                user.Status = "1";
+                userRepository.Update(user);
+            }
+            //Else if status is "1" which is "Active", User Status will become
+            //"Inactive" which is "0", after clicking the button to change user status
+            else
+            {
+                //User status is set to "0", which is "Inactive" 
+                user.Status = "0";
+                userRepository.Update(user);
+            }
+            //After changing the user status it will be redirected to the same page.
+            return RedirectToAction("UserDetails", new { id = id });
         }
     }
 }
