@@ -99,5 +99,51 @@ namespace EduMax.Controllers
             //After changing the user status it will be redirected to the same page.
             return RedirectToAction("UserDetails", new { id = id });
         }
+
+        public ActionResult EditProfile()
+        {
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            int id = (int)Session["credential_id"];
+            User user = this.userRepository.Get(id);//Getting the user object by id and assigning to another object as a reference.
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult EditProfile(User user)
+        {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            /*After submitting the form both back-end and front-end validation is done. The follwing line is for back-end validation.*/
+            if (ModelState.IsValid)
+            {
+                //Since User and Credential table have one-to-one relationship between them, therfore both table have to be updated.
+                //First the user table will be updated.
+                user.Credential.CredentialId = user.UserId;
+                this.userRepository.Update(user);
+
+                //The credential table is updated
+                Credential credential = new Credential();
+                credential.CredentialId = user.Credential.CredentialId;
+                credential.Email = user.Credential.Email;
+                credential.Password = user.Credential.Password;
+                //In Credential table the usertype attribute value is defined by the session
+                credential.UserType = Session["user_type"].ToString();
+
+                CredentialRepository credentialRepository = new CredentialRepository();
+                credentialRepository.Update(credential);
+
+                return RedirectToAction("Index");
+            }   
+            //In back-end validation, if validation is not done, then the page will be loaded again
+            return View(user);
+        }
     }
 }

@@ -14,10 +14,13 @@ namespace EduMax.Models
         [ForeignKey("Credential")]        
         public int UserId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Name is required!")]
         public string  Name { get; set; }
         public DateTime Date { get; set; }
+
+        [Required(ErrorMessage = "Institution is required!")]
         public string Institution { get; set; }
+
         [Required]
         public string Status { get; set; }
 

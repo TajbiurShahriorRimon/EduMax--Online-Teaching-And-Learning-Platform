@@ -12,6 +12,8 @@ namespace EduMax.Models
         public int CredentialId { get; set; }
         [Required]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "Password Field Required")]
         public string Password { get; set; }
         public string UserType { get; set; }
 

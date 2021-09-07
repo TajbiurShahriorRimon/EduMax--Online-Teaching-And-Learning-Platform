@@ -79,6 +79,6 @@ namespace EduMax.Controllers
             }
 
             return View();
-        }
+        }        
     }
 }
