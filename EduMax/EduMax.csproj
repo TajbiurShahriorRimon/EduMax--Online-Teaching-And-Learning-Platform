@@ -292,6 +292,7 @@
     <Content Include="Views\User\UserDetails.cshtml" />
     <Content Include="Views\User\ChangeProfile.cshtml" />
     <Content Include="Views\User\EditProfile.cshtml" />
+    <Content Include="Views\Course\CourseLectureList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

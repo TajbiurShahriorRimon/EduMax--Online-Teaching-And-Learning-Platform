@@ -89,5 +89,18 @@ namespace EduMax.Controllers
             //and the following line will be exectued.
             return RedirectToAction("Index", "User", new{ searchCourse });
         }
+
+        public ActionResult CourseLectureList(int id)
+        {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            Course course = new CourseRepository().Get(id);
+            
+            return View(course);
+        }
     }
 }
