@@ -10,6 +10,7 @@ namespace EduMax.Models
     public class Lecture
     {
         public int LectureId { get; set; }
+        [Required, MaxLength(150)]
         public string LectureName { get; set; }
         public DateTime Date { get; set; }
         public string FileLocation { get; set; }
@@ -18,6 +19,7 @@ namespace EduMax.Models
         [NotMapped]
         public HttpPostedFileBase File { get; set; }
 
+        [Required]
         public int CourseId { get; set; }
         public Course Course { get; set; }
     }

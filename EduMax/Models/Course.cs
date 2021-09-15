@@ -16,10 +16,13 @@ namespace EduMax.Models
         }
 
         public int CourseId { get; set; }
-        [Required]
+        [Required, MaxLength(150)]
         public string CourseName { get; set; }
         public DateTime Date { get; set; }
         public string CoursePhoto { get; set; }
+
+        [Required, Range(0.0, Double.MaxValue)]
+        public double Price { get; set; }
         public string Status { get; set; }
 
         [Required]
@@ -32,6 +35,7 @@ namespace EduMax.Models
 
         public virtual List<Lecture> Lectures { get; set; }
         public virtual List<Assignment> Assignments { get; set; }
+        public virtual List<Invoice> Invoices { get; set; }
 
         public virtual ICollection<Student> Students { get; set; }
 

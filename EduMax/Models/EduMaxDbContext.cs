@@ -25,6 +25,8 @@ namespace EduMax.Models
         public DbSet<Lecture> Lectures { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<StudentCourse> StudentCourses { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<SalesRecord> SalesRecords { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

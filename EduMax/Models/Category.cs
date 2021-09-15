@@ -9,7 +9,7 @@ namespace EduMax.Models
     public class Category
     {
         public int CategoryId { get; set; }
-        [Required]
+        [Required, MaxLength(100)]
         public string CategoryName { get; set; }
         [Required]
         public string Status { get; set; }

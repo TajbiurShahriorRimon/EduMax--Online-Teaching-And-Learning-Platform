@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cart</h2>
+
+
+@if(Session["cart"] == null)
+{
+    <h2>Nothing in Cart</h2>
+    <a class="btn" href="/User/Index">Shop Now</a>
+}

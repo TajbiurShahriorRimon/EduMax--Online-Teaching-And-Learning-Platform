@@ -1,0 +1,73 @@
+﻿@model IEnumerable<EduMax.Models.Course>
+
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cart</h2> <hr/>
+
+@if (Model.Count() > 0)
+{
+    <p>
+        @Html.ActionLink("Continue Shopping", "Index", "User")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Category
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Name)
+            </th>
+            <th>
+                Course
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CoursePhoto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseName)
+                </td>
+                <td>
+                    @if (item.CoursePhoto != null)
+                    {
+                        <img class="img-thumbnail" src="@Url.Content(item.CoursePhoto)" alt="" height="150" width="200" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.CourseId }) |
+                    @*@Html.ActionLink("Delete", "RemoveFromShoppingCart", new { id = item.CourseId })*@
+                    <a href="/ShoppingCart/RemoveFromShoppingCart/@item.CourseId" class="btn btn-danger">X</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <a href="" class="btn btn-info btn-group-justified">Checkout</a>
+}
+else {
+    <h2>Nothing Added in the Cart</h2>
+    <h3>
+        @Html.ActionLink("Start Shopping", "Index", "User")
+    </h3>
+}

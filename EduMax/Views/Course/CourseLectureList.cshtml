@@ -81,9 +81,9 @@
                             }
                             else if (list.FileLocation.Contains(".mp4") || list.FileLocation.Contains(".ogg"))
                             {
-                                <video height="200" width="300" controls>
-                                    <source src="@Url.Content(list.FileLocation)" type="video/mp4" />
-                                    <source src="@Url.Content(list.FileLocation)" type="video/ogg" />
+                                <video height="200" width="300" controls >
+                                    <source src="@Url.Content(list.FileLocation)" type="video/mp4" id="@list.LectureId.ToString()" />
+                                    <source src="@Url.Content(list.FileLocation)" type="video/ogg" id="@list.LectureId.ToString()" />
                                     Sorry, your browser doesn't support the video element.
                                 </video>
                             }

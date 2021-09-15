@@ -35,7 +35,7 @@ namespace EduMax.Controllers
         [HttpPost]
         public ActionResult Create(Course course)
         {
-            /*When uses wants to create a course, the users first have to create the course, but the course will not be created at first.
+            /*When user wants to create a course, the users first have to create the course, but the course will not be created at first.
             Rather it will be stored in a session variable which is done in the the following line*/
             Session["createCourse"] = course;
 
@@ -102,5 +102,41 @@ namespace EduMax.Controllers
             
             return View(course);
         }
+
+        public ActionResult Cart()
+        {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            return View();
+        }
+
+        /*[HttpGet]
+        public ActionResult AddToCart(int id)
+        {
+            *//*If no session for Login is set the user will be redirected to the log-in page*//*
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            Course course = new CourseRepository().Get(id);
+
+            if (Session["cart"] == null)
+            {
+                Session["cart"] = course;
+            }
+            else
+            {
+                List<Course> courseList = (List<Course>) Session["cart"];
+                courseList.Add(course);
+                Session["cart"] = courseList;
+            }
+
+            return RedirectToAction("Index", "User");
+        }*/
     }
 }

@@ -133,6 +133,7 @@
     <Compile Include="Controllers\CredentialController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LectureController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -221,10 +222,16 @@
     <Compile Include="Migrations\202109061415549_user_Credential_Annotation.designer.cs">
       <DependentUpon>202109061415549_user_Credential_Annotation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202109081309126_Invoice_SalesRecord_Added.cs" />
+    <Compile Include="Migrations\202109081309126_Invoice_SalesRecord_Added.designer.cs">
+      <DependentUpon>202109081309126_Invoice_SalesRecord_Added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Assignment.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Models\SalesRecord.cs" />
     <Compile Include="Models\StudentCourse.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Credential.cs" />
@@ -293,6 +300,8 @@
     <Content Include="Views\User\ChangeProfile.cshtml" />
     <Content Include="Views\User\EditProfile.cshtml" />
     <Content Include="Views\Course\CourseLectureList.cshtml" />
+    <Content Include="Views\Course\Cart.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -376,6 +385,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202109061415549_user_Credential_Annotation.resx">
       <DependentUpon>202109061415549_user_Credential_Annotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109081309126_Invoice_SalesRecord_Added.resx">
+      <DependentUpon>202109081309126_Invoice_SalesRecord_Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

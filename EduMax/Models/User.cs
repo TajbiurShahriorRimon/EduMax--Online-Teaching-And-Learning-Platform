@@ -14,7 +14,7 @@ namespace EduMax.Models
         [ForeignKey("Credential")]        
         public int UserId { get; set; }
 
-        [Required(ErrorMessage = "Name is required!")]
+        [Required(ErrorMessage = "Name is required!"), MaxLength(150), MinLength(3, ErrorMessage = "Must be at least 3 characters")]
         public string  Name { get; set; }
         public DateTime Date { get; set; }
 
@@ -26,6 +26,9 @@ namespace EduMax.Models
 
         public virtual Credential Credential { get; set; }
 
-        public List<Course> Courses { get; set; }
+        public virtual List<Course> Courses { get; set; }
+        public virtual List<Invoice> Invoices { get; set; }
+        public virtual List<SalesRecord> SalesRecords { get; set; }
+
     }
 }
