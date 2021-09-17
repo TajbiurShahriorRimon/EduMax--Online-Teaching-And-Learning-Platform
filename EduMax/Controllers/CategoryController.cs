@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EduMax.Repository;
+using EduMax.Models.ViewModel;
 
 namespace EduMax.Controllers
 {
@@ -15,6 +16,12 @@ namespace EduMax.Controllers
         // GET: Category
         public ActionResult Index()
         {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
             EduMaxDbContext dbContext = new EduMaxDbContext();
             List<Category> categories = dbContext.Categories.ToList();
             return View(categories);
@@ -49,6 +56,12 @@ namespace EduMax.Controllers
         [HttpGet]
         public ActionResult CategoryStatus(int id) //For changing the category Status
         {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
             Category category = categoryRepository.Get(id);
             if(category.Status == "Active")
             {
@@ -61,6 +74,29 @@ namespace EduMax.Controllers
                 categoryRepository.Update(category);
             }
             return RedirectToAction("Index");
+        }
+
+        public ActionResult CategoryByCourse()
+        {
+            List<ChartModel> dataPoints = new List<ChartModel>();
+
+            List<GraphViewModel> list = this.categoryRepository.NumberOfCourseInCategory();
+
+            foreach(GraphViewModel data in list)
+            {
+                dataPoints.Add(new ChartModel(data.X_Axis, data.Y_Axis));
+            }
+
+            ViewBag.DataPoints = Newtonsoft.Json.JsonConvert.SerializeObject(dataPoints);
+
+            return View("CategoryByCourseChart");
+        }
+
+        public JsonResult CategoryByCourse123()
+        {
+            var list = this.categoryRepository.NumberOfCourseInCategory();
+            //return Json(list, JsonRequestBehavior.AllowGet);
+            return Json("Test Message", JsonRequestBehavior.AllowGet);
         }
     }
 }

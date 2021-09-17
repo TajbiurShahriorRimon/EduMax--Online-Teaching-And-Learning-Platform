@@ -57,14 +57,17 @@
     }
     else
     {
-        <table align="center">
+        <table class="table" align="center">
             <tr>
-                <td>Name</td>
+                <th>Name</th>
+                <th>File</th>
             </tr>
             @foreach (var item in Session["addLectureForCreatingCourse"] as IList<EduMax.Models.Lecture>)
             {
                 <tr>
                     <td>@item.LectureName</td>
+                    @*<td><img src="@item.File" width="300" height="250"/>e</td>*@
+                    <td>@item.File</td>
                 </tr>
             }
             <tr>

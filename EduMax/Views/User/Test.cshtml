@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bootstrap Example</title>
+    <title>EduMax</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -25,17 +25,20 @@
     <div class="container">
         <ul>
             <li>
-                <a href="/Course/Create" class="navbar-link">Create Course</a>
+                <a href="/Course/Create" class="navbar-link">Create Course</a> |
                 <a href="/Lecture/Create" class="navbar-btn">Create Lecture</a>
                 @if (Session["user_type"].ToString() == "Admin")
                 {
                     <a href="/User/AllUsers" class="navbar-btn">Users</a>
+                    <span>| <a href="/Category/Index">Categories</a> |</span>
+
                 }
                 @if (Session["user_type"].ToString() != "Admin")
                 {
                     <a href="/Course/Cart" class="navbar-btn">My Cart</a>
+                    <span>| <a href="/Course/UserCreatedCourses">Created Courses</a> |</span>
                 }
-                <a href="/User/EditProfile" class="navbar-link">Edit Profile</a>
+                <a href="/User/EditProfile" class="navbar-link">Edit Profile</a> |
                 <a href="/Home/LogOut" class="navbar-btn">Log Out</a>
             </li>
         </ul>
@@ -73,6 +76,7 @@
                         if (item.Status == "1")
                         {
                             <a href="/Course/CourseLectureList/@item.CourseId" style="text-decoration:none; color:black">
+                                <div>
                                 <div class="card-deck">
                                     <div class="card mb-4">
                                         @if (item.CoursePhoto != null)
@@ -84,81 +88,27 @@
                                             <p style="color:forestgreen">Category: <strong style="color:black">@item.Category.CategoryName</strong></p>
                                             <strong>@item.User.Name <br /></strong>
                                             <p class="text-muted">@item.Date.Day/@item.Date.Month/@item.Date.Year</p>
-                                            @Html.ActionLink("Add To Cart", "AddToCart", "Course", new { id = item.CourseId}, null)
 
-                                            @*<a href="#" class="btn btn-primary">See Profile</a>*@
+                                            @if (Session["user_type"].ToString() != "Admin")
+                                            {
                                             <form action="/ShoppingCart/AddToShoppingCart/@item.CourseId" method="get">
-                                                <input type="submit" name="@item.CourseId" value="Add To Cart" />
+                                                <input type="submit" class="btn btn-primary" name="@item.CourseId" value="Add To Cart" />
                                             </form>
+                                            }
                                         </div>
                                     </div>
+                                </div>
                                 </div>
                             </a>
                         }
 
                     }
-
-                    <table class="container">
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CourseName)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Date)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CoursePhoto)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Status)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CategoryId)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.UserId)
-                            </th>
-                            <th></th>
-                        </tr>
-
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CourseName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Date)
-                                </td>
-                                <td>
-                                    @*@Html.DisplayFor(modelItem => item.CoursePhoto)*@
-                                    @if (item.CoursePhoto != null)
-                                    {
-                                        <img src="@Url.Content(item.CoursePhoto)" alt="" height="150" width="200" />
-                                    }
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Status)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.UserId)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.CourseId }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.CourseId }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.CourseId })
-                                </td>
-                            </tr>
-                        }
-
-                    </table>
+                    
                 </div>
             </div>
         </div>
 
+    </div>
 
 </body>
 </html>

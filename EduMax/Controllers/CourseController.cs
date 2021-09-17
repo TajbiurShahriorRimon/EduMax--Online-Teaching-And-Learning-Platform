@@ -114,29 +114,16 @@ namespace EduMax.Controllers
             return View();
         }
 
-        /*[HttpGet]
-        public ActionResult AddToCart(int id)
+        public ActionResult UserCreatedCourses()
         {
-            *//*If no session for Login is set the user will be redirected to the log-in page*//*
+            /*If no session for Login is set the user will be redirected to the log-in page*/
             if (Session["user_email"] == null)
             {
                 return RedirectToAction("Login", "Home");
             }
 
-            Course course = new CourseRepository().Get(id);
-
-            if (Session["cart"] == null)
-            {
-                Session["cart"] = course;
-            }
-            else
-            {
-                List<Course> courseList = (List<Course>) Session["cart"];
-                courseList.Add(course);
-                Session["cart"] = courseList;
-            }
-
-            return RedirectToAction("Index", "User");
-        }*/
+            List<Course> courses = new CourseRepository().UserCreatedCourseList((int)Session["credential_id"]);
+            return View(courses);
+        }
     }
 }

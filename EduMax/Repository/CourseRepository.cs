@@ -21,5 +21,13 @@ namespace EduMax.Repository
             List<Course> courses = context.Courses.SqlQuery(query).ToList();
             return courses;
         }
+
+        public List<Course> UserCreatedCourseList(int userId)
+        {
+            string sqlQuery = $"select * from Courses where UserId = {userId}";
+
+            List<Course> courses = context.Courses.SqlQuery(sqlQuery).ToList();
+            return courses;
+        }
     }
 }

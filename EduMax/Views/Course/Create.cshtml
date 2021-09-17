@@ -5,6 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.validate.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
 <h2>Create</h2>
 @{
     string userTypeSession = Session["user_type"].ToString();
@@ -40,27 +44,27 @@ else
         </div>
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.CoursePhoto, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CoursePhoto, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CoursePhoto, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @Html.LabelFor(model => model.CoursePhoto, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CoursePhoto, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CoursePhoto, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CategoryId, "Category",htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CategoryId, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.EditorFor(model => model.CategoryId, new { htmlAttributes = new { @class = "form-control" } })*@
                 <select class="form-control" name="CategoryId">
-                    @foreach(var item in ViewData["categoryList"] as IList<EduMax.Models.Category>)
+                    @foreach (var item in ViewData["categoryList"] as IList<EduMax.Models.Category>)
                     {
                         <option value="@item.CategoryId">
                             @item.CategoryName
@@ -69,6 +73,14 @@ else
                 </select>
                 @*@Html.DropDownListFor(model => model.CategoryId, new SelectList(ViewData["categoryList"]), "Select")*@
                 @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
             </div>
         </div>
 

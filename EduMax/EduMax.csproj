@@ -56,6 +56,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -239,6 +240,8 @@
     <Compile Include="Models\Lecture.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\ViewModel\ChartModel.cs" />
+    <Compile Include="Models\ViewModel\GraphViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\CourseRepository.cs" />
@@ -302,6 +305,8 @@
     <Content Include="Views\Course\CourseLectureList.cshtml" />
     <Content Include="Views\Course\Cart.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\Category\CategoryByCourseChart.cshtml" />
+    <Content Include="Views\Course\UserCreatedCourses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
