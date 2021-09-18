@@ -28,32 +28,6 @@ namespace EduMax.Controllers
             return View("Test", new CourseRepository().GetAll());
         }
 
-        public ActionResult Create()
-        {
-            /*If no session for Login is set the user will be redirected to the log-in page*/
-            if (Session["user_email"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-            User user = new User();
-            user.Name = TempData["tempName"].ToString();
-            user.Date = DateTime.Now;
-            user.Status = "Active";
-            user.Institution = TempData["tempInstitution"].ToString();
-
-            Credential credential = new Credential();
-            credential.Email = TempData["tempEmail"].ToString();
-            credential.Password = TempData["tempPassword"].ToString();
-            credential.UserType = "Teacher";
-
-            new UserRepository().Insert(user);
-            new CredentialRepository().Insert(credential);
-            
-
-            return Content("Created");
-
-        }
-
         public ActionResult AllUsers()
         {
             /*If no session for Login is set the user will be redirected to the log-in page*/

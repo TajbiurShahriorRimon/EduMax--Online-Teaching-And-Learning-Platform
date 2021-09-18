@@ -7,6 +7,11 @@
 
 <h2>Create</h2>
 
+@{
+    int index = 0;
+    List<EduMax.Models.Lecture> lectures = (List<EduMax.Models.Lecture>)Session["addLectureForCreatingCourse"];
+}
+
 @using (Html.BeginForm("Create", "Lecture", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -30,48 +35,38 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.CourseId, "Course", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <select class="form-control" name="CourseId">
-                        @foreach (var item in ViewData["courseList"] as IList<EduMax.Models.Course>)
-                        {
-                            <option value="@item.CourseId">
-                                @item.CourseName
-                            </option>
-                        }
-                    </select>
-                    @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" name="addOneLectureBtn" class="btn btn-default" />                
+                <input type="submit" value="Create" name="addOneLectureBtn" class="btn btn-default" />
             </div>
         </div>
     </div>
-    if (Session["addLectureForCreatingCourse"] == null)
+    if (Session["addLectureForCreatingCourse"] == null || lectures.Count == 0)
     {
-        <div align="center"><h2>Nothing Added Yet</h2></div>        
+        <div align="center"><h2>Nothing Added Yet</h2></div>
     }
     else
     {
-        <table class="table" align="center">
+        <table class="table table-hover" align="center">
             <tr>
                 <th>Name</th>
                 <th>File</th>
+                <th></th>
             </tr>
             @foreach (var item in Session["addLectureForCreatingCourse"] as IList<EduMax.Models.Lecture>)
             {
-                <tr>
-                    <td>@item.LectureName</td>
-                    @*<td><img src="@item.File" width="300" height="250"/>e</td>*@
-                    <td>@item.File</td>
+                <tr>                    
+                    <td onclick="ReOrdering(@index)">@item.LectureName</td>
+                    <td>@item.File.FileName</td>
+                    <th>
+                        <a href="/Lecture/Edit/@index">Edit</a> &nbsp;&nbsp;
+                        <a href="/Lecture/RemoveLectureFromCart/@index" class="btn btn-danger">X</a>
+                    </th>
                 </tr>
+                index++;
             }
             <tr>
-                <td><input type="submit" value="Done" name="createCourseWithLecturesBtn" class="btn btn-default" /></td>
+                <td align="center"><input type="submit" value="Done" name="createCourseWithLecturesBtn" class="btn btn-default" /></td>
             </tr>
         </table>
     }
@@ -81,3 +76,9 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+<script type="text/javascript">
+    function ReOrdering(id) {
+        alert(id);
+    }
+</script>

@@ -307,6 +307,7 @@
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\Category\CategoryByCourseChart.cshtml" />
     <Content Include="Views\Course\UserCreatedCourses.cshtml" />
+    <Content Include="Views\Lecture\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

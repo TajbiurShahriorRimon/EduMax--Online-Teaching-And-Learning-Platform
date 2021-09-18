@@ -8,9 +8,12 @@ namespace EduMax.Repository
 {
     public class CredentialRepository : Repository<Credential>
     {
-        public void Register(Credential credential)
+        public int GetLatestId()
         {
+            string sqlQuery = "select top 1 * from Credentials order by CredentialId desc";
+            Credential credential = context.Credentials.SqlQuery(sqlQuery).SingleOrDefault();
 
+            return credential.CredentialId;
         }
 
         public Credential CheckForLogin(Credential credential)

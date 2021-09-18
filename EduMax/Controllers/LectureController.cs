@@ -14,6 +14,12 @@ namespace EduMax.Controllers
         // GET: Lecture
         public ActionResult Index()
         {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
             return View();
         }
 
@@ -31,8 +37,14 @@ namespace EduMax.Controllers
         [HttpPost]
         public ActionResult Create(Lecture lecture)
         {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
             /*In the form there are two buttons named "addOneLectureBtn" and "createCourseWithLecturesBtn". If "addOneLectureBtn is clicked"
-              the the follwong line will be executed.*/            
+              the the follwong line will be executed.*/
             if (Request.Form["addOneLectureBtn"] != null)
             {
                 lecture.Status = "1";
@@ -69,6 +81,12 @@ namespace EduMax.Controllers
 
         public ActionResult InsertLectures()
         {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
             //After inserting the course into the database, it is time to store lectures into the database.
 
             List<Lecture> courseLectures = (List<Lecture>)Session["addLectureForCreatingCourse"];
@@ -107,5 +125,71 @@ namespace EduMax.Controllers
 
             return RedirectToAction("Index", "User");
         }
+
+        public ActionResult RemoveLectureFromCart(int id)
+        {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            List<Lecture> courseLectures = (List<Lecture>)Session["addLectureForCreatingCourse"];
+            courseLectures.RemoveAt(id);
+
+            Session["addLectureForCreatingCourse"] = courseLectures;
+
+            return RedirectToAction("Create");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            List<Lecture> courseLectures = (List<Lecture>)Session["addLectureForCreatingCourse"];
+            Lecture lecture = courseLectures[id];
+            ViewBag.Index = id;
+            return View(lecture);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Lecture lecture, FormCollection collection)
+        {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            /*Lecture lecture = new Lecture();
+            lecture.LectureName = collection["LectureName"];
+            lecture.File = (HttpPostedFileBase)collection["File"];*/
+
+            List<Lecture> courseLectures = (List<Lecture>)Session["addLectureForCreatingCourse"];
+            int index = Convert.ToInt32(collection["index"]);
+            courseLectures[index].LectureName = lecture.LectureName;
+            if (lecture.File != null)
+            {
+                courseLectures[index].File = lecture.File;
+            }
+
+            Session["addLectureForCreatingCourse"] = courseLectures;
+            return RedirectToAction("Create");
+        }
+
+        /*public ActionResult LectureOrderingUp(int id)
+        {
+            List<Lecture> courseLectures = (List<Lecture>)Session["addLectureForCreatingCourse"];
+            if(courseLectures.Count > 1)
+            {
+
+            }
+            return View();
+        }*/
+
     }
 }

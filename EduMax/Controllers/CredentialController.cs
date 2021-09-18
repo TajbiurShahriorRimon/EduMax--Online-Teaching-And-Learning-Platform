@@ -19,9 +19,35 @@ namespace EduMax.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(FormCollection formCollection)
+        public ActionResult Index(Credential credential1)
         {
-            if (formCollection["student"] == "Register as Student")
+            if (ModelState.IsValid)
+            {
+                User user = new User();
+                user.Name = credential1.User.Name;
+                user.Date = DateTime.Now;
+                user.Status = "1";
+                user.Institution = credential1.User.Institution;
+
+                Credential credential = new Credential();
+                credential.Email = credential1.Email;
+                credential.Password = credential1.Password;
+                credential.UserType = "Teacher";
+
+                new CredentialRepository().Insert(credential);
+
+                user.UserId = new CredentialRepository().GetLatestId();
+                new UserRepository().Insert(user);
+
+                return RedirectToAction("Login", "Home");
+            }
+            ViewBag.UserEmail = credential1.Email;
+            ViewBag.UserPassword = credential1.Password;
+            ViewBag.UserInstitution = credential1.User.Institution;
+            ViewBag.UserName = credential1.User.Name;
+            return View();
+
+            /*if (formCollection["student"] == "Register as Student")
             {
                 return Content("fdsfesf");
             }
@@ -57,7 +83,7 @@ namespace EduMax.Controllers
                 TempData["tempInstitution"] = formCollection["Institution"];
                 return RedirectToAction("Create", "Teacher");
             }
-            return Content("registered");
+            return Content("registered");*/
         }
 
         [HttpPost]
