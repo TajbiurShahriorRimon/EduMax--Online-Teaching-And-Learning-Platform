@@ -9,6 +9,7 @@
 
 @{
     int index = 0;
+    int num = 0;
     List<EduMax.Models.Lecture> lectures = (List<EduMax.Models.Lecture>)Session["addLectureForCreatingCourse"];
 }
 
@@ -49,17 +50,22 @@
     {
         <table class="table table-hover" align="center">
             <tr>
+                <th>#</th>
                 <th>Name</th>
                 <th>File</th>
                 <th></th>
             </tr>
             @foreach (var item in Session["addLectureForCreatingCourse"] as IList<EduMax.Models.Lecture>)
             {
-                <tr>                    
+                num = index + 1;
+                <tr>     
+                    <td>@num</td>
                     <td onclick="ReOrdering(@index)">@item.LectureName</td>
                     <td>@item.File.FileName</td>
                     <th>
                         <a href="/Lecture/Edit/@index">Edit</a> &nbsp;&nbsp;
+                        <a href="/Lecture/LectureOrderingUp/@index" class="btn btn-info">↑</a>
+                        <a href="/Lecture/LectureOrderingDown/@index" class="btn btn-info">↓</a> &nbsp;
                         <a href="/Lecture/RemoveLectureFromCart/@index" class="btn btn-danger">X</a>
                     </th>
                 </tr>

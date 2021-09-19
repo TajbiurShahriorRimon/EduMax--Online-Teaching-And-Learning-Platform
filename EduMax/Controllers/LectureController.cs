@@ -181,15 +181,51 @@ namespace EduMax.Controllers
             return RedirectToAction("Create");
         }
 
-        /*public ActionResult LectureOrderingUp(int id)
+        public ActionResult LectureOrderingUp(int id)
         {
             List<Lecture> courseLectures = (List<Lecture>)Session["addLectureForCreatingCourse"];
-            if(courseLectures.Count > 1)
+            if (courseLectures.Count > 1)
             {
+                if (id == 0)
+                {
+                    Lecture temp = courseLectures[courseLectures.Count - 1];
+                    courseLectures[courseLectures.Count - 1] = courseLectures[id];
+                    courseLectures[id] = temp;
+                }
+                else
+                {
+                    Lecture temp = courseLectures[id - 1];
+                    courseLectures[id - 1] = courseLectures[id];
+                    courseLectures[id] = temp;
+                }
 
+                Session["addLectureForCreatingCourse"] = courseLectures;
             }
-            return View();
-        }*/
+            return RedirectToAction("Create");
+        }
+
+        public ActionResult LectureOrderingDown(int id)
+        {
+            List<Lecture> courseLectures = (List<Lecture>)Session["addLectureForCreatingCourse"];
+            if (courseLectures.Count > 1)
+            {
+                if (id == courseLectures.Count - 1)
+                {
+                    Lecture temp = courseLectures[0];
+                    courseLectures[0] = courseLectures[courseLectures.Count - 1];
+                    courseLectures[courseLectures.Count - 1] = temp;
+                }
+                else
+                {
+                    Lecture temp = courseLectures[id + 1];
+                    courseLectures[id + 1] = courseLectures[id];
+                    courseLectures[id] = temp;
+                }
+
+                Session["addLectureForCreatingCourse"] = courseLectures;
+            }
+            return RedirectToAction("Create");
+        }
 
     }
 }

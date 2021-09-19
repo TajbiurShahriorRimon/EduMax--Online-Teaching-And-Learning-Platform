@@ -15,8 +15,14 @@ namespace EduMax.Controllers
         //by default it is assigned null. If any value is passes then value will be assgined to the parameter
         public ActionResult Index(string searchCourse = null)
         {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
             /*Checks if the parameter consists a value or not.*/
-            if(searchCourse != null)
+            if (searchCourse != null)
             {
                 /*When a user searches for a course, the value will be stored in the viewbag which is used to pass data to the
                  search bar and which wil be displayed*/
