@@ -1,0 +1,40 @@
+﻿@model IEnumerable<EduMax.Models.Lecture>
+
+@{
+    ViewBag.Title = "UserLearningCourseLectures";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>UserLearningCourseLectures</h2>
+
+<div class="container">
+    <table class="table">
+        @foreach (var list in Model)
+        {
+            <tbody>
+                <tr>
+                    <td>@list.LectureName</td>
+                    <td>
+                        @if (list.FileLocation.Contains(".png") || list.FileLocation.Contains(".jpg"))
+                        {
+                            <img src="@Url.Content(list.FileLocation)" height="200" width="300" />
+                            <a href="@Url.Content(list.FileLocation)" download="@list.LectureName">Download</a>
+                        }
+                        else if (list.FileLocation.Contains(".mp4") || list.FileLocation.Contains(".ogg"))
+                        {
+                            <video height="200" width="300" controls>
+                                <source src="@Url.Content(list.FileLocation)" type="video/mp4" id="@list.LectureId.ToString()" />
+                                <source src="@Url.Content(list.FileLocation)" type="video/ogg" id="@list.LectureId.ToString()" />
+                                Sorry, your browser doesn't support the video element.
+                            </video>
+                        }
+                        else
+                        {
+                            <a href="@Url.Content(list.FileLocation)" download="@list.LectureName">Download</a>
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>

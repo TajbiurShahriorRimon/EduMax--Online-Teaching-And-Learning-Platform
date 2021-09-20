@@ -13,7 +13,8 @@ namespace EduMax.Models
         [Required, EmailAddress]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Password Field Required")]
+        [Required(ErrorMessage = "Password Field Required"), MaxLength(15, ErrorMessage = "Cannot be more than 15 characters"),
+            MinLength(5, ErrorMessage = "Cannot be less than 5 characters")]
         public string Password { get; set; }
         public string UserType { get; set; }
 

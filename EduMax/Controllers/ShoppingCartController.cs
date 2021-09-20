@@ -24,6 +24,9 @@ namespace EduMax.Controllers
                 //Assigning the cart items to list of Course.
                 List<Course> courses = (List<Course>)Session["shoppingCart"];
 
+                double sumAmount = TotalPrice(courses);
+                ViewBag.TotalPrice = sumAmount;
+
                 //Since item exists in the cart, we will send the cart object to the view.
                 return View(courses);
             }
@@ -128,6 +131,34 @@ namespace EduMax.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        public static double TotalPrice(List<Course> courses)
+        {
+            double sumAmount = 0;
+            foreach (Course course in courses)
+            {
+                sumAmount += course.Price;
+            }
+
+            return sumAmount;
+        }
+
+        public ActionResult Checkout()
+        {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            //Assigning the cart items to list of Course.
+            List<Course> courses = (List<Course>)Session["shoppingCart"];
+
+            double sumAmount = TotalPrice(courses);
+            ViewBag.TotalPrice = sumAmount;
+
+            return View();
         }
     }
 }

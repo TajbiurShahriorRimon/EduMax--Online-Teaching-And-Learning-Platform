@@ -35,7 +35,7 @@ namespace EduMax.Models
 
         public virtual List<Lecture> Lectures { get; set; }
         public virtual List<Assignment> Assignments { get; set; }
-        public virtual List<Invoice> Invoices { get; set; }
+        public virtual List<SalesRecord> SalesRecords { get; set; }
 
         public virtual ICollection<Student> Students { get; set; }
 

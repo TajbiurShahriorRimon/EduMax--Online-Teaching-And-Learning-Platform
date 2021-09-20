@@ -1,0 +1,34 @@
+﻿@model IEnumerable<EduMax.Models.SalesRecord>
+
+@{
+    ViewBag.Title = "InvoiceDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>InvoiceDetails</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Course
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    if (ViewBag.Id == item.InvoiceId)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.CourseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+    </tr>
+    }
+}
+
+</table>

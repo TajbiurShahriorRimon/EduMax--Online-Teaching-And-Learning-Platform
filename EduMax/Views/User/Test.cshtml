@@ -26,17 +26,17 @@
         <ul>
             <li>
                 <a href="/Course/Create" class="navbar-link">Create Course</a> |
-                <a href="/Lecture/Create" class="navbar-btn">Create Lecture</a>
                 @if (Session["user_type"].ToString() == "Admin")
                 {
                     <a href="/User/AllUsers" class="navbar-btn">Users</a>
                     <span>| <a href="/Category/Index">Categories</a> |</span>
-
+                    <span> <a href="/Invoice/Index">Invoice</a> |</span>
                 }
                 @if (Session["user_type"].ToString() != "Admin")
                 {
                     <a href="/Course/Cart" class="navbar-btn">My Cart</a>
                     <span>| <a href="/Course/UserCreatedCourses">Created Courses</a> |</span>
+                    <span> <a href="/Course/UserLearningCourses">My Learnings</a> |</span>
                 }
                 <a href="/User/EditProfile" class="navbar-link">Edit Profile</a> |
                 <a href="/Home/LogOut" class="navbar-btn">Log Out</a>

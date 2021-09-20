@@ -133,7 +133,9 @@
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\CredentialController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\LectureController.cs" />
+    <Compile Include="Controllers\SalesRecordController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -227,6 +229,10 @@
     <Compile Include="Migrations\202109081309126_Invoice_SalesRecord_Added.designer.cs">
       <DependentUpon>202109081309126_Invoice_SalesRecord_Added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202109191057151_SalesRecord_Invoice_Updated.cs" />
+    <Compile Include="Migrations\202109191057151_SalesRecord_Invoice_Updated.designer.cs">
+      <DependentUpon>202109191057151_SalesRecord_Invoice_Updated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Assignment.cs" />
@@ -246,9 +252,12 @@
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\CourseRepository.cs" />
     <Compile Include="Repository\CredentialRepository.cs" />
+    <Compile Include="Repository\InvoiceRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\LectureRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Repository\SalesRecordRepository.cs" />
+    <Compile Include="Repository\StudentCourseRepository.cs" />
     <Compile Include="Repository\StudentRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
@@ -308,6 +317,12 @@
     <Content Include="Views\Category\CategoryByCourseChart.cshtml" />
     <Content Include="Views\Course\UserCreatedCourses.cshtml" />
     <Content Include="Views\Lecture\Edit.cshtml" />
+    <Content Include="Views\ShoppingCart\Checkout.cshtml" />
+    <Content Include="Views\Invoice\Index.cshtml" />
+    <Content Include="Views\SalesRecord\Details.cshtml" />
+    <Content Include="Views\SalesRecord\Index.cshtml" />
+    <Content Include="Views\Course\UserLearningCourses.cshtml" />
+    <Content Include="Views\Lecture\UserLearningCourseLectures.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -394,6 +409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202109081309126_Invoice_SalesRecord_Added.resx">
       <DependentUpon>202109081309126_Invoice_SalesRecord_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109191057151_SalesRecord_Invoice_Updated.resx">
+      <DependentUpon>202109191057151_SalesRecord_Invoice_Updated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

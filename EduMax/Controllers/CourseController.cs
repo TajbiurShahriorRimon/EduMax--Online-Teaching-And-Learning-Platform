@@ -125,5 +125,18 @@ namespace EduMax.Controllers
             List<Course> courses = new CourseRepository().UserCreatedCourseList((int)Session["credential_id"]);
             return View(courses);
         }
+
+        public ActionResult UserLearningCourses()
+        {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            int id = (int)Session["credential_id"];
+            List<Course> courses = new CourseRepository().UserLearningCourseList(id);
+            return View(courses);
+        }        
     }
 }

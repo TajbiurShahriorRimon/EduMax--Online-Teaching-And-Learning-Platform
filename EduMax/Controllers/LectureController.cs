@@ -227,5 +227,16 @@ namespace EduMax.Controllers
             return RedirectToAction("Create");
         }
 
+        public ActionResult UserLearningCourseLectures(int id)
+        {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            List<Lecture> lectures = new LectureRepository().UserLearningCourseLectures(id);
+            return View(lectures);
+        }
     }
 }

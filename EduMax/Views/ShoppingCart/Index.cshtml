@@ -55,15 +55,16 @@
                 </td>
                 <td>
                     @Html.ActionLink("Details", "Details", new { id = item.CourseId }) |
-                    @*@Html.ActionLink("Delete", "RemoveFromShoppingCart", new { id = item.CourseId })*@
                     <a href="/ShoppingCart/RemoveFromShoppingCart/@item.CourseId" class="btn btn-danger">X</a>
                 </td>
             </tr>
         }
 
     </table>
+    <hr />
+    <p><strong style="color: darkmagenta">Total Price: @ViewBag.TotalPrice</strong></p>
 
-    <a href="" class="btn btn-info btn-group-justified">Checkout</a>
+    <a href="/ShoppingCart/Checkout" class="btn btn-info btn-group-justified">Checkout</a>
 }
 else {
     <h2>Nothing Added in the Cart</h2>

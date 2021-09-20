@@ -11,14 +11,12 @@ namespace EduMax.Models
     {
         public int InvoiceId { get; set; }
         public DateTime Date { get; set; }
-        public double Amount { get; set; }
+        public double TotalAmount { get; set; }
 
         [Required]
         public int UserId { get; set; }
         public virtual User User { get; set; }
 
-        [Required]
-        public int CourseId { get; set; }
-        public virtual Course Course { get; set; }
+        public virtual List<SalesRecord> SalesRecords { get; set; }
     }
 }

@@ -28,7 +28,6 @@ namespace EduMax.Models
 
         public virtual List<Course> Courses { get; set; }
         public virtual List<Invoice> Invoices { get; set; }
-        public virtual List<SalesRecord> SalesRecords { get; set; }
 
     }
 }

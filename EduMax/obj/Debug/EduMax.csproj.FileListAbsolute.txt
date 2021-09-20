@@ -81,3 +81,4 @@ D:\Project\EduMax\obj\Debug\EduMax.Migrations.Lecture_Assignment_updated.resourc
 D:\Project\EduMax\obj\Debug\EduMax.Migrations.Assignment_updated.resources
 D:\Project\EduMax\obj\Debug\EduMax.Migrations.user_Credential_Annotation.resources
 D:\Project\EduMax\obj\Debug\EduMax.Migrations.Invoice_SalesRecord_Added.resources
+D:\Project\EduMax\obj\Debug\EduMax.Migrations.SalesRecord_Invoice_Updated.resources
