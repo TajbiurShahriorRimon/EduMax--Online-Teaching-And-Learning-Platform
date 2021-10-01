@@ -18,6 +18,27 @@ namespace EduMax.Controllers
             return View();
         }
 
+        public ActionResult List(string searchCourse = null)
+        {
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            /*Checks if the parameter consists a value or not.*/
+            if (searchCourse != null)
+            {
+                /*When a user searches for a course, the value will be stored in the viewbag which is used to pass data to the
+                 search bar and which wil be displayed*/
+                ViewBag.courseSearchQuery = searchCourse;
+                /*In the same page the course will be loaded when user searches for a course.*/
+                return View("List", new CourseRepository().SearchCourseByString(searchCourse));
+            }
+            //The following line takes to the default view of course list. That is the "home page"
+            return View("List", new CourseRepository().GetAll());
+        }
+
         public ActionResult Create()
         {
             /*If no session is set the user will be redirected to the log-in page*/
@@ -82,12 +103,13 @@ namespace EduMax.Controllers
             return RedirectToAction("InsertLectures", "Lecture");
         }
 
+        [HttpPost]
         public ActionResult SearchCourse(string searchCourse)
         {
             //When user search for a course using the search bar, first from javascript file it will be checked whether the
             //the search string is empty or not. If it is empty, the js function will return false; else this method wlll be executed
             //and the following line will be exectued.
-            return RedirectToAction("Index", "User", new{ searchCourse });
+            return RedirectToAction("List", new{ searchCourse });
         }
 
         public ActionResult CourseLectureList(int id)

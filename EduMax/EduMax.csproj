@@ -270,6 +270,7 @@
     <Content Include="asset\images\backgrounds\success-story.jpg" />
     <Content Include="asset\images\banner\banner-1.jpg" />
     <Content Include="asset\images\banner\banner-feature.png" />
+    <Content Include="asset\images\banner\coconut.jpg" />
     <Content Include="asset\images\blog\blog-single.jpg" />
     <Content Include="asset\images\blog\post-1.jpg" />
     <Content Include="asset\images\blog\post-2.jpg" />
@@ -404,6 +405,7 @@
     <Content Include="Views\Course\UserLearningCourses.cshtml" />
     <Content Include="Views\Lecture\UserLearningCourseLectures.cshtml" />
     <Content Include="Views\Shared\_LayoutPage1.cshtml" />
+    <Content Include="Views\Course\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

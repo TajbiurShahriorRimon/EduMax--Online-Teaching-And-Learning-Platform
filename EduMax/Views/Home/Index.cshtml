@@ -6,15 +6,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+
     <style>
         .limit-text {
-            @*width: 100px;
-            height: auto;*@
-            @*white-space: nowrap;
-            overflow: hidden;*@
-            @*overflow-wrap: break-word;*@
-            @*text-overflow: ellipsis;*@
-
             overflow: hidden;
             -webkit-flex-line-pack: justify;
             text-overflow: ellipsis;
@@ -177,7 +171,7 @@
                                 </p>
                                 @*<a href="course-single.html" class="btn btn-primary btn-sm">Apply now</a>*@
                                 <form action="/Test/CourseTest" method="get">
-                                    <input type="url" class="btn btn-primary btn-sm" name="One" value="Apply Now" />
+                                    <input type="submit" class="btn btn-primary btn-sm" name="One" value="Apply Now" />
                                 </form>
                             </div>
                         </div>
@@ -186,7 +180,7 @@
                 <!-- course item -->
                 <div class="col-lg-4 col-sm-6 mb-5">
                     <div class="card p-0 border-primary rounded-0 hover-shadow">
-                        <img class="card-img-top rounded-0" src="~/asset/images/courses/home.jpg" height="285" alt="course thumb">
+                        <img class="card-img-top rounded-0" src="~/asset/images/courses/course-2.jpg" height="285" alt="course thumb">
                         <div class="card-body">
                             <ul class="list-inline mb-2">
                                 <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>02-14-2018</li>
@@ -294,34 +288,18 @@
         </div>
     </section>
     <!-- /courses -->
+
+    @*<script src="~/asset/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="~/asset/plugins/slick/slick.min.js"></script>
+    <script src="~/asset/plugins/aos/aos.js"></script>
+    <script src="~/asset/plugins/venobox/venobox.min.js"></script>
+    <script src="~/asset/plugins/filterizr/jquery.filterizr.min.js"></script>
+    <script src="~/asset/plugins/jQuery/jquery.min.js"></script>
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
+    <script src="~/asset/plugins/google-map/gmap.js"></script>
+
+    <script src="~/asset/js/script.js"></script>*@
 </body>
 </html>
-
-
-@*<div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </div>
-    </div>*@

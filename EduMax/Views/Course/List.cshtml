@@ -1,0 +1,88 @@
+﻿@model IEnumerable<EduMax.Models.Course>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <style>
+        .limit-text {
+            overflow: hidden;
+            -webkit-flex-line-pack: justify;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* number of lines to show */
+            -webkit-box-orient: vertical;
+        }
+    </style>
+</head>
+<body>
+    <!-- page title -->
+    <section class="page-title-section overlay">
+        <div class="container bg-image">
+            <div class="row">
+                <div class="col-md-8">
+                    <ul class="list-inline custom-breadcrumb">
+                        <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="courses.html">Our Courses</a></li>
+                        <li class="list-inline-item text-white h3 font-secondary "></li>
+                    </ul>
+                    <p class="text-lighten">Our courses offer a good compromise between the continuous assessment favoured by some universities and the emphasis placed on final exams by others.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /page title -->
+    <!-- courses -->
+    <section class="section">
+        <div class="container">
+            <!-- course list -->
+            <div class="row justify-content-lg-start">
+                <!-- course item -->
+                @foreach (var item in Model)
+                {
+                    if (item.Status == "1")
+                    {
+                        <div class="col-lg-4 col-sm-6 mb-5">
+                            <a href="/Course/CourseLectureList/@item.CourseId">
+                                <div class="card p-0 border-primary rounded-0 hover-shadow">
+                                    @if (item.CoursePhoto != null)
+                                    {
+                                        <img class="card-img-top rounded-0" src="@Url.Content(item.CoursePhoto)" alt="course thumb" height="285" />
+                                    }
+                                    else
+                                    {
+                                        <img class="card-img-top rounded-0" src="~/asset/images/teacher.jpg" alt="course thumb" height="285" />
+                                    }
+                                    <div class="card-body">
+                                        <ul class="list-inline mb-2">
+                                            <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>@item.Date.Day-@item.Date.Month-@item.Date.Year</li>
+                                            <li class="list-inline-item"><object><a class="text-color" href="#">@item.Category.CategoryName</a></object></li>
+                                        </ul>
+                                        <object>
+                                            <a href="course-single.html">
+                                                <h4 class="card-title">@item.CourseName</h4>
+                                            </a>
+                                        </object>
+                                        @*<p class="card-text mb-4">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna.
+                                        </p>*@
+                                        @if (Session["user_type"].ToString() != "Admin")
+                                        {
+                                        <object><a href="/ShoppingCart/AddToShoppingCart/@item.CourseId" class="btn btn-primary btn-sm">Add to Cart</a></object>
+                                        }
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    }
+                }
+            </div>
+        </div>
+    </section>
+    <!-- /courses -->
+</body>
+</html>

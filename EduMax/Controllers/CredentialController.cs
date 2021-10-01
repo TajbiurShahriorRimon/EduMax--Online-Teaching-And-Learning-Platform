@@ -100,7 +100,8 @@ namespace EduMax.Controllers
 
                 if (user.UserType == "Teacher" || user.UserType == "Admin")
                 {
-                    return RedirectToAction("Index", "User");
+                    //return RedirectToAction("Index", "User");
+                    return RedirectToAction("List", "Course");
                 }
             }
 
