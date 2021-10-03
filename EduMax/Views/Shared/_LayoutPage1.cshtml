@@ -33,11 +33,11 @@
                     <div class="col-lg-4 text-center text-lg-left">
                         <a class="text-color mr-3" href="callto:+443003030266"><strong>CALL</strong> +44 300 303 0266</a>
                         <ul class="list-inline d-inline">
-                            <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="#"><i class="ti-facebook"></i></a></li>
-                            <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="#"><i class="ti-twitter-alt"></i></a></li>
-                            <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="#"><i class="ti-linkedin"></i></a></li>
-                            <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="#"><i class="ti-instagram"></i></a></li>
-                            <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="#"><i class="ti-search"></i></a></li>
+                            <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="https://www.facebook.com/tajbiurshahrior.rimon"><i class="ti-facebook"></i></a></li>
+                            <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="https://github.com/TajbiurShahriorRimon"><i class="ti-github"></i></a></li>
+                            <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="#"><i class="ti-user"></i></a></li>
+                            <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="mailto: tajbiurshahriorrimon@gmail.com"><i class="ti-email"></i></a></li>
+                            <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="https://tajbiurshahriorrimon.github.io/profile_site/"><i class="ti-search"></i></a></li>
                         </ul>
                     </div>
                     <div class="col-lg-8 text-center text-lg-right">
@@ -54,7 +54,7 @@
         </div>
         <!-- navbar -->
         <div class="navigation w-100">
-            <div class="container">
+            <div style="background-color:black;">
                 <nav class="navbar navbar-expand-lg navbar-dark p-0">
                     <a class="navbar-brand" href="index.html"><img src="~/asset/images/logo2.png" alt="logo" width="200"></a>
                     <button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation"
@@ -67,17 +67,14 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href="/Test/Index">Home</a>
                             </li>
-                            <li class="nav-item about">
-                                <a class="nav-link" href="about.html">About</a>
-                            </li>
                             <li class="nav-item courses">
                                 <a class="nav-link" href="/Test/CourseTest" onclick="navColor()">COURSES</a>
                             </li>
                             <li class="nav-item">
                                 <form class="navbar-left" action="/Course/SearchCourse" method="post" id="searchCourse" onsubmit="return checkSearchQuery()">
                                     <input class="form-control" type="text" name="searchCourse" value="@ViewBag.courseSearchQuery"
-                                        id="searchCourseTxt"placeholder="Search.." >
-                                    <button type="submit" name="search" class="btn-success ti-search btn-sm">Search</button>
+                                           id="searchCourseTxt" placeholder="Search..">
+                                    <button type="submit" name="search" class="btn-success ti-search btn-sm"></button>
                                     @*<input type="submit" class="btn-danger ti-search" name="search" value="Search" />*@
                                 </form>
 
@@ -85,28 +82,31 @@
 
                             </li>
 
-                            @*<li class="nav-item events">
-                                <a class="nav-link" href="events.html">EVENTS</a>
+                            @*@if (Session["user_type"].ToString() == "Admin")
+                                {*@
+                            <li class="nav-item about">
+                                <a class="nav-link" href="/User/AllUsers">Users</a>
                             </li>
-                            <li class="nav-item events">
-                                <a class="nav-link" href="events.html">EVENTS</a>
-                            </li>*@
+                            @*}*@
                             <li class="nav-item dropdown view">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false">
                                     Pages
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="teacher.html">Teacher</a>
+                                    <a class="dropdown-item" href="/User/EditProfile">Edit Profile</a>
                                     <a class="dropdown-item" href="teacher-single.html">Teacher Single</a>
                                     <a class="dropdown-item" href="notice.html">Notice</a>
                                     <a class="dropdown-item" href="notice-single.html">Notice Details</a>
                                     <a class="dropdown-item" href="research.html">Research</a>
                                     <a class="dropdown-item" href="scholarship.html">Scholarship</a>
-                                    <a class="dropdown-item" href="course-single.html">Course Details</a>
+                                    <a class="dropdown-item" href="/Course/Create">Create Course</a>
                                     <a class="dropdown-item" href="event-single.html">Event Details</a>
                                     <a class="dropdown-item" href="blog-single.html">Blog Details</a>
                                 </div>
+                            </li>
+                            <li class="nav-item about">
+                                <a class="nav-link" href="about.html">About</a>
                             </li>
                         </ul>
                     </div>
@@ -178,7 +178,7 @@
             </div>
         </div>
     </div>
-
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     <div>
         @RenderBody()
     </div>
@@ -192,7 +192,7 @@
 
 
     @*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
-    <script src="~/asset/plugins/google-map/gmap.js"></script>*@
+        <script src="~/asset/plugins/google-map/gmap.js"></script>*@
 
     <script src="~/asset/js/script.js"></script>
 
