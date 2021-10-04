@@ -2,43 +2,43 @@
 
 @{
     ViewBag.Title = "UserLearningCourses";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<h2>UserLearningCourses</h2>
+    <div class="container">
+        <h2>Your Courses of Learning</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Category
-        </th>
-        <th>
-            Course
-        </th>
-        <th>
-            
-        </th>
-        <th></th>
-    </tr>
+        <table class="table">
+            <tr>
+                <th>
+                    Category
+                </th>
+                <th>
+                    Course
+                </th>
+                <th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category.CategoryName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CourseName)
-        </td>
-        <td>
-            <img src="@Url.Content(item.CoursePhoto)" alt="" height="150" width="200" />
-        </td>
-        <td>
-            @Html.ActionLink("Lectures", "UserLearningCourseLectures", "Lecture", new { id=item.CourseId }, null) 
-        </td>
-    </tr>
-}
+                </th>
+                <th></th>
+            </tr>
 
-</table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseName)
+                    </td>
+                    <td>
+                        <img src="@Url.Content(item.CoursePhoto)" alt="" height="150" width="200" />
+                    </td>
+                    <td>
+                        @Html.ActionLink("Lectures", "UserLearningCourseLectures", "Lecture", new { id = item.CourseId }, null)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
