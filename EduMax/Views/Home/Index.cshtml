@@ -6,6 +6,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
     <style>
         .limit-text {
@@ -19,6 +24,10 @@
     </style>
 </head>
 <body>
+    @*@using (Ajax.BeginForm("Index", "Credential", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "frmEmp" }))
+    {*@
+        <div class="modal fade" id="regModal" tabindex="-1" role="dialog" aria-hidden="true" data-url='@Url.Action("PartialLogin", "Credential")'>@Html.Partial("~/Views/Credential/PartialLogin.cshtml")</div>
+    @*}*@
     <section class="hero-section overlay bg-cover" data-background="~/asset/images/banner/banner-1.jpg">
         <div class="container">
             <div class="hero-slider">
@@ -33,7 +42,8 @@
                                 incididunt ut labore et
                                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exer
                             </p>
-                            <a href="contact.html" class="btn btn-primary" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".7">Apply now</a>
+                            @*<a href="contact.html" class="btn btn-primary" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".7">Apply now</a>*@
+                            <button id="reg2">click</button>
                         </div>
                     </div>
                 </div>
@@ -289,17 +299,18 @@
     </section>
     <!-- /courses -->
 
-    @*<script src="~/asset/plugins/bootstrap/bootstrap.min.js"></script>
-    <script src="~/asset/plugins/slick/slick.min.js"></script>
-    <script src="~/asset/plugins/aos/aos.js"></script>
-    <script src="~/asset/plugins/venobox/venobox.min.js"></script>
-    <script src="~/asset/plugins/filterizr/jquery.filterizr.min.js"></script>
-    <script src="~/asset/plugins/jQuery/jquery.min.js"></script>
-
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
-    <script src="~/asset/plugins/google-map/gmap.js"></script>
-
-    <script src="~/asset/js/script.js"></script>*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#reg2').click(function () {
+                @*alert("hello world");*@
+                var url = $("#regModal").data("url");
+                $.get(url, function (data) {
+                    //alert("hello world");
+                    $("#regModal").html(data);
+                    $("#regModal").modal('show');
+                });
+            });
+        });
+    </script>
 </body>
 </html>

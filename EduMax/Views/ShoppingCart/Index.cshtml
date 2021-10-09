@@ -6,8 +6,16 @@
 }
     <div class="container">
         <h2>Cart</h2> <hr />
-
-        @if (Model.Count() > 0)
+        @*if no course is selected for adding in the cart, then this Session is null and therefore this line will be executed*@
+        @if (Session["shoppingCart"] == null)
+        {
+            <h2>Nothing Added in the Cart</h2>
+            <h3>
+                @Html.ActionLink("Start Shopping", "Index", "User")
+            </h3>
+        }
+        @*if any course is added in the shopping cart then this line executes*@
+        else if (Model.Count() > 0)
         {
             <p>
                 @Html.ActionLink("Continue Shopping", "List", "Course")
@@ -66,6 +74,8 @@
 
             <a href="/ShoppingCart/Checkout" class="btn btn-info btn-group-justified">Checkout</a>
         }
+        @*After removing courses from the shopping cart, if the shopping cart becomes empty by then, then still the 
+        Session["shopping cart"] is not null and but the count will be zero, so the following line will be executed*@
         else
         {
             <h2>Nothing Added in the Cart</h2>

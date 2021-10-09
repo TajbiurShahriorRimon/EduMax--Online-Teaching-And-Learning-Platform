@@ -30,6 +30,14 @@ namespace EduMax.Controllers
                 //Since item exists in the cart, we will send the cart object to the view.
                 return View(courses);
             }
+            //The following line executes only if user did not add any course into the shopping cart
+            else if(Session["shoppingCart"] == null)
+            {
+                //So if no product is added in the cart the shopping cart becomes null and thereore if the user wants to
+                //check or see his cart, we have to make the course list to null.
+                List<Course> courses = null;
+                return View(courses);
+            }
 
             //The following line executes if the shopping cart has no item.
             return View();

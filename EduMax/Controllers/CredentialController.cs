@@ -19,6 +19,7 @@ namespace EduMax.Controllers
         }
 
         [HttpPost]
+        //[ValidateAntiForgeryToken]
         public ActionResult Index(Credential credential1)
         {
             if (ModelState.IsValid)
@@ -45,7 +46,8 @@ namespace EduMax.Controllers
             ViewBag.UserPassword = credential1.Password;
             ViewBag.UserInstitution = credential1.User.Institution;
             ViewBag.UserName = credential1.User.Name;
-            return View();
+            return PartialView("PartialLogin");
+            //return PartialView("~/Views/Home/Index.cshtml");
 
             /*if (formCollection["student"] == "Register as Student")
             {
@@ -106,6 +108,11 @@ namespace EduMax.Controllers
             }
 
             return View();
-        }        
+        }  
+        
+        public ActionResult PartialLogin()
+        {
+            return PartialView();
+        }
     }
 }

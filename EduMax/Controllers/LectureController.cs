@@ -204,17 +204,25 @@ namespace EduMax.Controllers
             return RedirectToAction("Create");
         }
 
-        public ActionResult LectureOrderingDown(int id)
+        //This method is invoked when the user wants to re-order the leacture list downward when creating a course
+        public ActionResult LectureOrderingDown(int id) //the id parameter is value of the index number in the table list.
         {
             List<Lecture> courseLectures = (List<Lecture>)Session["addLectureForCreatingCourse"];
+            /*If more than one lecture is added when creating course then it is possible to re-order. If there lecture list
+             size is zero or 1 then it is not required for re-ordering*/
             if (courseLectures.Count > 1)
             {
+                /*If that particular lecture is at the bottom of the list, after the action performed, the lecture must move
+                at the top.*/
+                //If the lecture is at the bottom of the table list, then the following line will be executed.
                 if (id == courseLectures.Count - 1)
-                {
+                {                    
                     Lecture temp = courseLectures[0];
+                    //Now we have to take the bottom course to the top
                     courseLectures[0] = courseLectures[courseLectures.Count - 1];
                     courseLectures[courseLectures.Count - 1] = temp;
                 }
+                //Else if the lecture is not at the bottom of the table list, then the following line will be executed.
                 else
                 {
                     Lecture temp = courseLectures[id + 1];
