@@ -52,7 +52,7 @@ namespace EduMax.Controllers
                 return RedirectToAction("Login", "Home");
             }
 
-            /*irst we have to check whether the course is already added to the shopping cart or not which is selected*/
+            /*First we have to check whether the course is already added to the shopping cart or not which is selected*/
             bool checkIfCourseExistInCart = IfCourseAdded(id);
 
             //If course is already added to the shopping cart, then we will redirected to the shopping cart view,
@@ -64,7 +64,7 @@ namespace EduMax.Controllers
             
             List<Course> courses = new List<Course>();
 
-            //Getting the course object with the hepl of id.
+            //Getting the course object with the help of id.
             Course course = new CourseRepository().Get(id);
 
             /*If the shopping cart does not contain any course then following line will be executed.*/

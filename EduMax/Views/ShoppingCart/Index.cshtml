@@ -11,7 +11,7 @@
         {
             <h2>Nothing Added in the Cart</h2>
             <h3>
-                @Html.ActionLink("Start Shopping", "Index", "User")
+                @Html.ActionLink("Start Shopping", "List", "Course")
             </h3>
         }
         @*if any course is added in the shopping cart then this line executes*@
@@ -63,7 +63,7 @@
                         </td>
                         <td>
                             @Html.ActionLink("Details", "Details", new { id = item.CourseId })
-                            <a href="/ShoppingCart/RemoveFromShoppingCart/@item.CourseId" class="btn-danger btn-sm">X</a>
+                            <a href="/ShoppingCart/RemoveFromShoppingCart/@item.CourseId" class="btn-danger btn-xs">X</a>
                         </td>
                     </tr>
                 }
@@ -75,12 +75,12 @@
             <a href="/ShoppingCart/Checkout" class="btn btn-info btn-group-justified">Checkout</a>
         }
         @*After removing courses from the shopping cart, if the shopping cart becomes empty by then, then still the 
-        Session["shopping cart"] is not null and but the count will be zero, so the following line will be executed*@
+        Session["shopping cart"] is not null and the count will be zero, so the following line will be executed*@
         else
         {
             <h2>Nothing Added in the Cart</h2>
             <h3>
-                @Html.ActionLink("Start Shopping", "Index", "User")
+                @Html.ActionLink("Start Shopping", "List", "Course")
             </h3>
         }
     </div>

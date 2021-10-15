@@ -1,25 +1,82 @@
 ﻿@model EduMax.Models.Course
+@using EduMax.Models;
 
 @{
-    ViewBag.Title = "CourseLectureList";
+    ViewBag.Title = "Course Lecture";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
-    <section class="page-title-section overlay">
-        <div class="container bg-image">
-            <div class="row">
-                <div class="col-md-8">
-                    <ul class="list-inline custom-breadcrumb">
-                        <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="courses.html">Courses Details</a></li>
-                        <li class="list-inline-item text-white h3 font-secondary "></li>
-                    </ul>
-                </div>
+<section class="page-title-section overlay">
+    <div class="container bg-image">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-inline custom-breadcrumb">
+                    <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="courses.html">Courses Details</a></li>
+                    <li class="list-inline-item text-white h3 font-secondary "></li>
+                </ul>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 <div class="container">
     <h4>Course</h4>
     <hr />
+    @if (Session["user_type"].ToString() != "Admin")
+    {
+        @*If the user who is logged in matches the credential id with the course User id (that means creator of the course),
+            then this means that course belongs to the user. So the following line will be executed*@
+        if (Convert.ToInt32(Session["credential_id"]) == Model.UserId)
+        {
+            <a href="/Lecture/UserLearningCourseLectures/@Model.CourseId" class="btn btn-outline-danger rounded btn-lg btn-block">Check Your Created Course!</a>
+        }
+        else if (ViewBag.Signal == true)
+        {
+            <a href="/Lecture/UserLearningCourseLectures/@Model.CourseId" class="btn btn-dark btn-lg btn-block">Go to Course</a>
+        }
+        else
+        {
+            @*The follwing variable is used as a signal, meaning if the particual coruse in the course list
+                is added in the cart or not. If it is added in the cart, then the signal is "1", else "0"*@
+            string sig = "0";
+
+            @*Assigning the Shopping Cart Session to List of Courses*@
+            List<Course> courses = (List<Course>)Session["shoppingCart"];
+
+            @*If the list of courses is null, this means the shopping cart session is assigned to list of courses,
+                and if the shopping cart is null then this means the list of courses is null. Therefore user will be given
+                the option to add the course into the cart*@
+            if (courses == null)
+            {
+                <object><a href="/ShoppingCart/AddToShoppingCart/@Model.CourseId" class="btn btn-primary btn-lg btn-block">Add to Cart</a></object>
+            }
+            else
+            {
+                if (courses.Count > 0)
+                {
+                    foreach (Course course in courses)
+                    {
+                        @*For each course we will check if the course exist in the cart matches the
+                            course id in the course details. If matches, this means the course is in the
+                            shopping cart, then there a button "Go to cart" button will be shown which
+                            takes user to the cart page and the breaks after assigning Signal to 1*@
+                        if (Model.CourseId == course.CourseId)
+                        {
+                            <object><a href="/ShoppingCart/Index" class="btn btn-primary btn-sm">Go to Cart</a></object>
+                            @*The sig = "1" means that this particular product is added to cart*@
+                            sig = "1";
+                            break;
+                        }
+
+                    }
+                }
+                @*The following line executes if the particular course is not added to shopping cart*@
+                if (sig == "0")
+                {
+                    <object><a href="/ShoppingCart/AddToShoppingCart/@Model.CourseId" class="btn btn-primary btn-sm">Add to Cart</a></object>
+                }
+            }
+        }
+    }
     <dl class="dl-horizontal">
         <dt>
             Category
@@ -52,26 +109,27 @@
         <dd>
             @Html.DisplayFor(model => model.Date)
         </dd>
+        <dt>Hello</dt>
     </dl>
 </div>
 
 @*<div class="container">
-    <h2>List Group With Custom Content</h2>
-    <div class="list-group">
-        <a href="#" class="list-group-item active">
-            <h4 class="list-group-item-heading">First List Group Item Heading</h4>
-            <p class="list-group-item-text">List Group Item Text</p>
-        </a>
-        <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Second List Group Item Heading</h4>
-            <p class="list-group-item-text">List Group Item Text</p>
-        </a>
-        <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Third List Group Item Heading</h4>
-            <p class="list-group-item-text">List Group Item Text</p>
-        </a>
-    </div>    
-</div>*@
+        <h2>List Group With Custom Content</h2>
+        <div class="list-group">
+            <a href="#" class="list-group-item active">
+                <h4 class="list-group-item-heading">First List Group Item Heading</h4>
+                <p class="list-group-item-text">List Group Item Text</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">Second List Group Item Heading</h4>
+                <p class="list-group-item-text">List Group Item Text</p>
+            </a>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">Third List Group Item Heading</h4>
+                <p class="list-group-item-text">List Group Item Text</p>
+            </a>
+        </div>
+    </div>*@
 
 @*Only Admin can check the lecture list*@
 @if (Session["user_type"].ToString() == "Admin" && Session["user_type"] != null)
@@ -91,7 +149,7 @@
                             }
                             else if (list.FileLocation.Contains(".mp4") || list.FileLocation.Contains(".ogg"))
                             {
-                                <video height="200" width="300" controls >
+                                <video height="200" width="300" controls>
                                     <source src="@Url.Content(list.FileLocation)" type="video/mp4" id="@list.LectureId.ToString()" />
                                     <source src="@Url.Content(list.FileLocation)" type="video/ogg" id="@list.LectureId.ToString()" />
                                     Sorry, your browser doesn't support the video element.

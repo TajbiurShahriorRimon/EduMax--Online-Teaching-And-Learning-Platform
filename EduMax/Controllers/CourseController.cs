@@ -120,8 +120,21 @@ namespace EduMax.Controllers
                 return RedirectToAction("Login", "Home");
             }
 
+            //Getting the data of particular course id.
             Course course = new CourseRepository().Get(id);
-            
+
+            //After getting the data, we have to check if the user logged-in has the  course for learning.
+            StudentCourse studentCourse = new StudentCourseRepository().CheckIfStudentHasCourse((int)Session["credential_id"], course.CourseId);
+            //The following line executes, meaning user do not have the course for learning, as a result the Signal is set to false
+            if (studentCourse == null)
+            {
+                ViewBag.Signal = false;
+            }
+            //Else The following line executes, meaning user has the course for learning, as a result the Signal is set to true
+            else
+            {
+                ViewBag.Signal = true;
+            }
             return View(course);
         }
 

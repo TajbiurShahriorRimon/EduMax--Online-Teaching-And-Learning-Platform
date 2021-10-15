@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<EduMax.Models.Course>
+@using EduMax.Models;
+@using EduMax.Repository;
 @{
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
@@ -55,25 +57,93 @@
                                     {
                                         <img class="card-img-top rounded-0" src="~/asset/images/teacher.jpg" alt="course thumb" height="285" />
                                     }
-                                    <div class="card-body">
-                                        <ul class="list-inline mb-2">
-                                            <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>@item.Date.Day-@item.Date.Month-@item.Date.Year</li>
-                                            <li class="list-inline-item"><object><a class="text-color" href="#">@item.Category.CategoryName</a></object></li>
-                                        </ul>
-                                        <object>
-                                            <a href="course-single.html">
-                                                <h4 class="card-title">@item.CourseName</h4>
-                                            </a>
-                                        </object>
-                                        @*<p class="card-text mb-4">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                            incididunt ut labore et dolore magna.
-                                        </p>*@
-                                        @if (Session["user_type"].ToString() != "Admin")
-                                        {
-                                        <object><a href="/ShoppingCart/AddToShoppingCart/@item.CourseId" class="btn btn-primary btn-sm">Add to Cart</a></object>
+                                <div class="card-body">
+                                    <ul class="list-inline mb-2">
+                                        <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>@item.Date.Day-@item.Date.Month-@item.Date.Year</li>
+                                        <li class="list-inline-item"><object><a class="text-color" href="#">@item.Category.CategoryName</a></object></li>
+                                    </ul>
+                                    <object>
+                                        <a href="/Course/CourseLectureList/@item.CourseId">
+                                            <h4 class="card-title">@item.CourseName</h4>
+                                        </a>
+                                    </object>
+                                    @*<p class="card-text mb-4">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna.
+                                    </p>*@
+
+                                    @*In the list of courses, admin will not be given the interface for button*@
+                                    @if (Session["user_type"].ToString() != "Admin")
+                                    {
+                                        @*The follwing variable is used as a signal, meaning if the particual coruse in the course list
+                                            is added in the cart or not. If it is added in the cart, then the signal is "1", else "0"*@
+                                        string sig = "0";
+
+                                        @*Assigning the Shopping Cart Session to List of Courses*@
+                                        List<Course> courses = (List<Course>)Session["shoppingCart"];
+
+                                        @*Getting all the data from StudentCourse table*@
+                                        List<StudentCourse> studentCourses = new StudentCourseRepository().GetAll();
+                                                
+                                        @*It will be checked if course id from Course table matches with course id from StudentCourse
+                                            table, and the logged-in user credential id matches with UserStudentId from StudentCourse table. 
+                                            If this matches, this means the user has the particular course as his learnings*@
+                                        foreach(StudentCourse list in studentCourses){
+                                            if(list.CourseId == item.CourseId && (int)Session["credential_id"] == list.UserStudentId){
+                                                <object><a href="/Lecture/UserLearningCourseLectures/@item.CourseId" class="btn btn-primary btn-sm">Go to Course</a></object>
+                                                sig = "-1";
+                                                @*So after matching, the signal will be assigned to "-1" meaning the particular course
+                                                    is a learning for the user*@
+                                                break;
+                                            }
                                         }
-                                    </div>
+                                        if(sig != "-1") {
+                                            
+                                        @*If the user who is logged in matches the credential id with the course User id (that means creator of the course), 
+                                            then this means that course belongs to the user. So the following line will be executed*@
+                                            if (Convert.ToInt32(Session["credential_id"]) == item.UserId)
+                                            {
+                                                <a href="/Lecture/UserLearningCourseLectures/@item.CourseId" class="btn btn-primary btn-sm">Your Created Course!</a>
+                                            }
+                                            @*If the list of courses is null, this means the shopping cart session is assigned to list of courses,
+                                                and if the shopping cart is null then this means the list of courses is null. Therefore user will be given
+                                                the option to add the course into the cart*@
+                                            else if (courses == null)
+                                            {
+                                                <object><a href="/ShoppingCart/AddToShoppingCart/@item.CourseId" class="btn btn-primary btn-sm">Add to Cart</a></object>
+                                            }                                                                               
+                                            else
+                                            {
+                                            @*Since there can be a situation where after emptying the cart after removing all courses from cart, still
+                                                the shopping cart session exists. Therefore we have to check if the Count valie is greater than zero.
+                                                If it is greater than zero, which means there is atleast one course exist in the shopping cart, then 
+                                                the following line executes*@
+                                                if (courses.Count > 0)
+                                                {                                                
+                                                    foreach (Course course in courses)
+                                                    {
+                                                        @*For each course we will check if the course exist in the cart matches the 
+                                                            course id in the course list. If matches, this means the course is in the 
+                                                            shopping cart, then there a button "Go to cart" button will be shown which 
+                                                            takes user to the cart page and the breaks after assigning Signal to 1*@
+                                                        if (item.CourseId == course.CourseId)
+                                                        {
+                                                            <object><a href="/ShoppingCart/Index" class="btn btn-primary btn-sm">Go to Cart</a></object>
+                                                            @*The sig = "1" means that this particular product is added to cart*@
+                                                            sig = "1";
+                                                            break;
+                                                        }                                                    
+                                                    }
+                                                }
+                                                @*The following line executes if the particular course is not added to shopping cart*@
+                                                if (sig == "0")
+                                                {
+                                                    <object><a href="/ShoppingCart/AddToShoppingCart/@item.CourseId" class="btn btn-primary btn-sm">Add to Cart</a></object>
+                                                }
+                                            } 
+                                        }
+                                    }
+                                </div>
                                 </div>
                             </a>
                         </div>
