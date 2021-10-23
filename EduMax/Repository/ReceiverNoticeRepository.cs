@@ -1,12 +1,12 @@
-﻿using EduMax.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using EduMax.Models;
 
 namespace EduMax.Repository
 {
-    public class UserRepository : Repository<User>
+    public class ReceiverNoticeRepository : Repository<ReceiverNotice>
     {
     }
 }

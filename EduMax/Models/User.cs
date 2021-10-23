@@ -23,6 +23,7 @@ namespace EduMax.Models
 
         [Required]
         public string Status { get; set; }
+        public string NotificationStatus { get; set; }
 
         public virtual Credential Credential { get; set; }
 

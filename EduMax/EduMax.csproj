@@ -135,6 +135,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\LectureController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\SalesRecordController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -233,11 +234,21 @@
     <Compile Include="Migrations\202109191057151_SalesRecord_Invoice_Updated.designer.cs">
       <DependentUpon>202109191057151_SalesRecord_Invoice_Updated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202110161904358_Notifications_relted_Table_Added.cs" />
+    <Compile Include="Migrations\202110161904358_Notifications_relted_Table_Added.designer.cs">
+      <DependentUpon>202110161904358_Notifications_relted_Table_Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110161912371_Notification_ReceiverNotification_Added.cs" />
+    <Compile Include="Migrations\202110161912371_Notification_ReceiverNotification_Added.designer.cs">
+      <DependentUpon>202110161912371_Notification_ReceiverNotification_Added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Assignment.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\ReceiverNotice.cs" />
     <Compile Include="Models\SalesRecord.cs" />
     <Compile Include="Models\StudentCourse.cs" />
     <Compile Include="Models\Course.cs" />
@@ -255,6 +266,8 @@
     <Compile Include="Repository\InvoiceRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\LectureRepository.cs" />
+    <Compile Include="Repository\NotificationRepository.cs" />
+    <Compile Include="Repository\ReceiverNoticeRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\SalesRecordRepository.cs" />
     <Compile Include="Repository\StudentCourseRepository.cs" />
@@ -408,12 +421,15 @@
     <Content Include="Views\Shared\_LayoutPage1.cshtml" />
     <Content Include="Views\Course\List.cshtml" />
     <Content Include="Views\Credential\PartialLogin.cshtml" />
+    <Content Include="Views\Notification\Create.cshtml" />
+    <Content Include="Views\Notification\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\CourseImage\" />
     <Folder Include="Files\Lectures\" />
     <Folder Include="Views\Admin\" />
+    <Folder Include="Views\LogOut\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -497,6 +513,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202109191057151_SalesRecord_Invoice_Updated.resx">
       <DependentUpon>202109191057151_SalesRecord_Invoice_Updated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110161904358_Notifications_relted_Table_Added.resx">
+      <DependentUpon>202110161904358_Notifications_relted_Table_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110161912371_Notification_ReceiverNotification_Added.resx">
+      <DependentUpon>202110161912371_Notification_ReceiverNotification_Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -53,11 +53,11 @@
                             </td>
                         }
 
-                        @*<td>
-                                @Html.ActionLink("D", "Delete", new { id=item.UserId })
-                            </td>*@
                         <td>
                             <a href="/User/UserDetails?id=@item.UserId">Check Profile</a>
+                        </td>
+                        <td>
+                            <a href="/Notification/Create/@item.UserId"><i class="ti-pencil-alt"></i></a>
                         </td>
                     </tr>
                 }
