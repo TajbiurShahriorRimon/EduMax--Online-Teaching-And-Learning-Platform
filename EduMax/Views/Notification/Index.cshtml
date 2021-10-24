@@ -5,11 +5,9 @@
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<h2>Index</h2>
+<div class="alert-dark container" align="center">
+<h2>Notifications</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -23,10 +21,11 @@
         </th>
         <th></th>
     </tr>
-
+    
 @foreach (var item in Model) {
     <tr>
         <td>
+            
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
@@ -34,13 +33,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Date)
-        </td>
+        </td>      
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.NotificationId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.NotificationId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.NotificationId })
+            <a href=""></a>
         </td>
     </tr>
 }
 
 </table>
+</div>

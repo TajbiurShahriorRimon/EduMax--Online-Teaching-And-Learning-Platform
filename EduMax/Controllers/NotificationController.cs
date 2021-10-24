@@ -12,10 +12,37 @@ namespace EduMax.Controllers
     {
         UserRepository userRepository = new UserRepository();
 
-        // GET: Notification
+        //Notification list for the particular user
         public ActionResult Index()
         {
-            return View();
+            /*If no session for Login is set the user will be redirected to the log-in page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            //The user credential id is reauired in order to get the user notification list.
+            // converting the credential id which is in the session and assigning it to a variable.
+            int userId = Convert.ToInt32(Session["credential_id"]);
+
+            //Now the data is retrieved with the help of lambda expression.
+            /*From the ReceiverNotices table, All the data are retrived where the user id matches the credential id*/
+            List<ReceiverNotice> receiverNotices = new ReceiverNoticeRepository().GetAll().Where(x => x.UserId == userId).ToList();
+
+            List<Notification> notifications = new List<Notification>();
+            
+            /*Now the notice data is required to retrieve from the Notifications Table*/
+            for(int i = 0; i < receiverNotices.Count; i++)
+            {
+                Notification notice = new Notification();
+                //Getting the notice list from the Notifications table only the particular notification id data found
+                //from the ReceiverNotifications table.
+                notice = new NotificationRepository().Get(receiverNotices[i].NotificationId);
+
+                //Adding the data into the generic list.
+                notifications.Add(notice);
+            }
+            return View(notifications);
         }
 
         public ActionResult Create(int id)
