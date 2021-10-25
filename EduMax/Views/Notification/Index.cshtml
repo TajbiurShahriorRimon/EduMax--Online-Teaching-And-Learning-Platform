@@ -1,44 +1,69 @@
-﻿@model IEnumerable<EduMax.Models.Notification>
+﻿@model IEnumerable<EduMax.Models.ReceiverNotice>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<div class="alert-dark container" align="center">
-<h2>Notifications</h2>
+<style>
+    .limit-text {
+        overflow: hidden;
+        -webkit-flex-line-pack: justify;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* number of lines to show */
+        -webkit-box-orient: vertical;
+    }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Message)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th></th>
-    </tr>
-    
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Message)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>      
-        <td>
-            <a href=""></a>
-        </td>
-    </tr>
-}
+    .limit-title {
+        overflow: hidden;
+        -webkit-flex-line-pack: justify;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1; /* number of lines to show */
+        -webkit-box-orient: vertical;
+    }
 
-</table>
-</div>
+    .unread-message {
+        color: red;        
+    }
+
+
+</style>
+
+    <div class="alert-dark container">
+        <h2>Notifications</h2>
+
+        @foreach (var item in Model)
+        {
+            <a href="/Notification/Get/@item.Notification.NotificationId">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-2">
+                            <img src="~/asset/images/favicon2.png" width="200" class="img-fluid img-circle">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                @if (item.ReadStatus == "0")
+                                {
+                                    <h2 class="card-title limit-title unread-message"><u>@item.Notification.Title</u></h2>
+                                    <p class="card-text limit-text unread-message"><strong>@item.Notification.Message</strong></p>
+                                    <p class="card-text unread-message"><small class="text-muted">@item.Notification.Date</small></p>
+                                }
+                                else
+                                {
+                                    <h2 class="card-title limit-title"><u>@item.Notification.Title</u></h2>
+                                    <p class="card-text limit-text">@item.Notification.Message</p>
+                                    <p class="card-text"><small class="text-muted">@item.Notification.Date</small></p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    @if (item.ReadStatus == "0")
+                    {
+                        <object><button type="button" class="btn btn-outline-info">Unread</button></object>
+                    }
+                    </div>                
+            </a>
+        }
+    </div>    

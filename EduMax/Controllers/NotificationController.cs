@@ -42,7 +42,12 @@ namespace EduMax.Controllers
                 //Adding the data into the generic list.
                 notifications.Add(notice);
             }
-            return View(notifications);
+            return View(receiverNotices);
+        }
+
+        public ActionResult Get(int id)
+        {
+            return View(new NotificationRepository().Get(id));
         }
 
         public ActionResult Create(int id)

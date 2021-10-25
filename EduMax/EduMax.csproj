@@ -423,6 +423,7 @@
     <Content Include="Views\Credential\PartialLogin.cshtml" />
     <Content Include="Views\Notification\Create.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
+    <Content Include="Views\Notification\Get.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
