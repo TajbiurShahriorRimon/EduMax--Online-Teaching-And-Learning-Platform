@@ -11,11 +11,12 @@ namespace EduMax.Controllers
     public class NotificationController : Controller
     {
         UserRepository userRepository = new UserRepository();
+        ReceiverNoticeRepository receiverNoticeRepository = new ReceiverNoticeRepository();
 
         //Notification list for the particular user
         public ActionResult Index()
         {
-            /*If no session for Login is set the user will be redirected to the log-in page*/
+            /*If no session for Login is set the user will be redirected to the landing page*/
             if (Session["user_email"] == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -29,29 +30,43 @@ namespace EduMax.Controllers
             /*From the ReceiverNotices table, All the data are retrived where the user id matches the credential id*/
             List<ReceiverNotice> receiverNotices = new ReceiverNoticeRepository().GetAll().Where(x => x.UserId == userId).ToList();
 
-            List<Notification> notifications = new List<Notification>();
-            
-            /*Now the notice data is required to retrieve from the Notifications Table*/
-            for(int i = 0; i < receiverNotices.Count; i++)
-            {
-                Notification notice = new Notification();
-                //Getting the notice list from the Notifications table only the particular notification id data found
-                //from the ReceiverNotifications table.
-                notice = new NotificationRepository().Get(receiverNotices[i].NotificationId);
-
-                //Adding the data into the generic list.
-                notifications.Add(notice);
-            }
             return View(receiverNotices);
         }
 
-        public ActionResult Get(int id)
+        //The following function executes when user clicks on a particular notice.
+        public ActionResult Get(int id) //NotificationID
         {
+            /*If no session for Login is set the user will be redirected to the landing page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            ReceiverNotice receiverNotice = new ReceiverNotice();
+            //Getting the information by the help of NotificationId (which is not primary key) from RecieverNotices 
+            receiverNotice = this.receiverNoticeRepository.GetReceiverNoticeInfo(id);
+            
+            //Now the following lines must be executed by creating a new instance of ReceiverNotice and then assigning the values
+            //to its properties one-by-one.
+            ReceiverNotice receiverNoticeInfo = new ReceiverNotice();
+            receiverNoticeInfo.ReceiverNoticeId = receiverNotice.ReceiverNoticeId;
+            receiverNoticeInfo.NotificationId = receiverNotice.NotificationId;
+            receiverNoticeInfo.UserId = receiverNotice.UserId;
+            //Now changing the ReadStatus to "1", meaning user has clicked on the notice.
+            receiverNoticeInfo.ReadStatus = "1";
+
+            //Without the above steps, if we want to update it directly without assiging values to the properties, then
+            // a run-time exception will occur.
+
+            //Now updating the ReceiverNotice table.
+            new ReceiverNoticeRepository().ChangeReaderStatus(receiverNoticeInfo);
+
             return View(new NotificationRepository().Get(id));
         }
 
         public ActionResult Create(int id)
         {
+            /*If no session for Login is set the user will be redirected to the landing page*/
             if (Session["user_email"] == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -65,6 +80,7 @@ namespace EduMax.Controllers
         [HttpPost]
         public ActionResult Create(Notification notification, int userId)
         {
+            /*If no session for Login is set the user will be redirected to the landing page*/
             if (Session["user_email"] == null)
             {
                 return RedirectToAction("Index", "Home");
