@@ -5,67 +5,70 @@
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 <script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+@*the following line is a js file script. This script exectues when user status will be changed button is clicked*@
+<script src="~/jsFiles/User/UserDetails.js"></script>
+
 <h2>User Details</h2>
 
 <div class="container">
     <h4>User</h4>
     <hr />
     <form method="post">
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Credential.Email)
-        </dt>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Credential.Email)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Credential.Email)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Credential.Email)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Institution)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Institution)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Institution)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Institution)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
 
-        @*@if (Model.Status == "1")
-        {
-        <dd>
-            <div id="userActive">Active</div>
-            &nbsp;&nbsp; <a href="/User/ChangeStatus?id=@Model.UserId">Change Status</a>
-        </dd>
-        }
-        else
-        {
-        <dd>
-            <div id="userInactive">Inactive</div>
-            &nbsp;&nbsp; <a href="/User/ChangeStatus?id=@Model.UserId">Change Status</a>
-        </dd>
-        }*@
+            @*@if (Model.Status == "1")
+                {
+                <dd>
+                    <div id="userActive">Active</div>
+                    &nbsp;&nbsp; <a href="/User/ChangeStatus?id=@Model.UserId">Change Status</a>
+                </dd>
+                }
+                else
+                {
+                <dd>
+                    <div id="userInactive">Inactive</div>
+                    &nbsp;&nbsp; <a href="/User/ChangeStatus?id=@Model.UserId">Change Status</a>
+                </dd>
+                }*@
 
-        <dd id="userStatus"></dd>
+            <dd id="userStatus"></dd>
 
-    </dl>
+        </dl>
     </form>
 </div>
 <div id="div2"></div>
@@ -80,7 +83,7 @@
 
         //Ajax call using jquery to retrieve User status.
         $.ajax({
-            url: "/User/UserDetailsData/@ViewBag.userIdForDetails",
+            url: "/User/UserDetailsData/@Model.UserId",
             method: "GET",
             async: false,
             dataType: 'json',
@@ -117,61 +120,4 @@
             }
         })
     })
-</script>
-
-<script type="text/javascript">
-    //Following line executes when the a button is clicked to change the particular user status
-    function ChangeUserStatus(id) {
-        //alert("hello: " + id);
-
-        //Ajax call using jquery to retrieve User status.
-        $.ajax({
-            url: "/User/ChangeStatus/" + id,
-            method: "GET",
-            async: false,
-            dataType: 'json',
-            //contentType: "application/json",
-
-            //If data is returned successfully and request is successful then the following line executes.
-            //If the data is successfully returned, it will be returned in json format and will be assigned in the data
-            //variable which is inside the function parameter
-            success: function (data) {
-                var str = ''; //empty variable
-                var userStatus = "";
-                //console.log(data);
-                //alert("success");
-
-                //If the returned data, which is user status is "0" then following line executes
-                if (data.Status == "0") {
-                    //Since returned data is "0" that means user status is "Inactive", therefore the "Inactive"
-                    //is assigned to userStatus variable
-                    userStatus = "Inactive";
-                    //alert("Changed Status to Inactive");
-
-                    str += userStatus + "<input type='button' class=\"btn btn-link\" onclick='ChangeUserStatus(" + @Model.UserId + ")' value='Change Status'>";
-                    $("#userStatus").html(str);
-                }
-                //Else the returned data, which is user status is "1" then following line executes
-                else {
-                    //Since returned data is "1" that means user status is "Active", therefore the "Active"
-                    //is assigned to userStatus variable
-                    userStatus = "Active";
-                    //alert("Changed Status to Active");
-
-                    //Assigning the userStatus along with concatenation of button type input to str varaible
-                    str += userStatus + "<input type='button' class=\"btn btn-link\" onclick='ChangeUserStatus(" + @Model.UserId + ")' value='Change Status'>";
-                    //The str variable will be passed as a html to html id "#userStatus"
-                    $("#userStatus").html(str);
-                    //alert("done");
-                }
-            },
-
-            //If the data returned gets error the following line executes.
-            error: function (err) {
-                alert("error");
-                //console.log(err)
-            }
-        })
-        //alert("done");
-    }
 </script>

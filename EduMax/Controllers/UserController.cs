@@ -49,20 +49,19 @@ namespace EduMax.Controllers
         {
             //Getting the user id and assigning to the ViewBag.
             //This user id is needed because when the view gets loaded using JQuery, the id is required to make a jquery ajax request
-            //for url: "/User/UserDetailsData/@ViewBag.userIdForDetails"
-            ViewBag.userIdForDetails = id;
+            //for url: "/User/UserDetailsData/@Model.UserId"
 
             //Returning a view with user data by the help if user id. This is because after the end of jquery ajax request, data will
-            //be loaded from this data. From this data, only the status will not be displayed. The status data will be takes
+            //be loaded from this data. From this data, only the status will not be displayed. The status data will be taken
             //after the jquery ajax request with the url: "/User/ChangeStatus/" + id
             return View("UserDetails", this.userRepository.Get(id));
         }
 
         //The following method will be call using jquery ajax request. Only the user status data will be passed
         public ActionResult UserDetailsData(int id)
-        {    
+        {
             //Getting the user id from the user table with the help of id. Only the user status will be taken from this object
-            User user = this.userRepository.Get(id);
+            User user = this.userRepository.GetUser(id); //Calling the function in the UserRepository.
 
             //Returning Json with two parameters, user status and JsonRequestBehavior.AllowGet. This will be returned to the same page
             //where it was called from.
