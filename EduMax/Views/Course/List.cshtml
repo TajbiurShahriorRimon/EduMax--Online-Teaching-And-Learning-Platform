@@ -18,7 +18,13 @@
             -webkit-line-clamp: 3; /* number of lines to show */
             -webkit-box-orient: vertical;
         }
+
+        .hover-icon:hover {
+            box-shadow: 0 0 11px rgb(0, 255, 144);
+        }
     </style>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
 <body>
     <!-- page title -->
@@ -62,6 +68,25 @@
                                         <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>@item.Date.Day-@item.Date.Month-@item.Date.Year</li>
                                         <li class="list-inline-item"><object><a class="text-color" href="#">@item.Category.CategoryName</a></object></li>
                                     </ul>
+                                    <div>
+                                        <div align="left">
+                                            <i class="ti-money"><u><strong>@item.Price</strong></u></i>
+                                        </div>
+                                        <div align="right">
+                                            @*<object><a onclick="favorite(@item.CourseId)">*@
+                                            <object>
+                                            <i id="@item.CourseId" onclick="favorite(@item.CourseId)" style="color: rebeccapurple;" class="ti-heart hover-icon"></i>
+                                            </object>
+                                            @*<i id="@item.CourseId" onclick="favorite(@item.CourseId)" style="color: rebeccapurple;" class="fas fa-heart hover-icon"></i>*@
+                                            @*</a></object>*@
+                                        </div>                                      
+                                    </div>
+                                    @*<div align="right">
+                                        <object>
+                                            <a href="#"><i class="ti-heart ti-heart"></i></a>
+                                        </object>
+                                    </div>*@
+                                    
                                     <object>
                                         <a href="/Course/CourseLectureList/@item.CourseId">
                                             <h4 class="card-title">@item.CourseName</h4>
@@ -103,7 +128,9 @@
                                             then this means that course belongs to the user. So the following line will be executed*@
                                             if (Convert.ToInt32(Session["credential_id"]) == item.UserId)
                                             {
-                                                <a href="/Lecture/UserLearningCourseLectures/@item.CourseId" class="btn btn-primary btn-sm">Your Created Course!</a>
+                                                <object>
+                                                    <a href="/Lecture/UserLearningCourseLectures/@item.CourseId" class="btn btn-primary btn-sm">Your Created Course!</a>
+                                                </object>
                                             }
                                             @*If the list of courses is null, this means the shopping cart session is assigned to list of courses,
                                                 and if the shopping cart is null then this means the list of courses is null. Therefore user will be given
@@ -156,3 +183,27 @@
     <!-- /courses -->
 </body>
 </html>
+
+<script type="text/javascript">
+    function favorite(id) {
+        var v = document.getElementById(id).value;        
+        alert("hello: " + id);
+        alert(v);
+        $("#" + id).removeClass("ti-heart");
+        $("#" + id).addClass("fas fa-heart");
+        $.ajax({
+            url: "/Course/UserFavoriteCourse/" + id,
+            method: "Get",
+            dataType: "json",
+
+            success: function (data) {
+                alert("success");
+                console.log(data);
+            },
+            error: function (data) {
+                alert("error");
+                alert(data);
+            }
+        })
+    }
+</script>

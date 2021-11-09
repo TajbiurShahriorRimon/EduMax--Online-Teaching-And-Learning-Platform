@@ -242,6 +242,10 @@
     <Compile Include="Migrations\202110161912371_Notification_ReceiverNotification_Added.designer.cs">
       <DependentUpon>202110161912371_Notification_ReceiverNotification_Added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111072050042_UserFavoriteCourse_table_added.cs" />
+    <Compile Include="Migrations\202111072050042_UserFavoriteCourse_table_added.designer.cs">
+      <DependentUpon>202111072050042_UserFavoriteCourse_table_added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Assignment.cs" />
@@ -257,6 +261,7 @@
     <Compile Include="Models\Lecture.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserFavoriteCourse.cs" />
     <Compile Include="Models\ViewModel\ChartModel.cs" />
     <Compile Include="Models\ViewModel\GraphViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -272,6 +277,7 @@
     <Compile Include="Repository\SalesRecordRepository.cs" />
     <Compile Include="Repository\StudentCourseRepository.cs" />
     <Compile Include="Repository\StudentRepository.cs" />
+    <Compile Include="Repository\UserFavoriteCourseRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -521,6 +527,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202110161912371_Notification_ReceiverNotification_Added.resx">
       <DependentUpon>202110161912371_Notification_ReceiverNotification_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111072050042_UserFavoriteCourse_table_added.resx">
+      <DependentUpon>202111072050042_UserFavoriteCourse_table_added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

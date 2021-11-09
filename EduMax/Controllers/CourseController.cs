@@ -172,6 +172,24 @@ namespace EduMax.Controllers
             int id = (int)Session["credential_id"];
             List<Course> courses = new CourseRepository().UserLearningCourseList(id);
             return View(courses);
-        }        
+        }
+
+        public ActionResult UserFavoriteCourse(int id) //Course Id
+        {
+            int userId = (int) Session["credential_id"];
+            List<UserFavoriteCourse> userFavoriteCourses = new UserFavoriteCourseRepository().IfCourseIsAddedInFavorite(id, userId);
+            if(userFavoriteCourses.Count == 0)
+            {
+                UserFavoriteCourse userFavorite = new UserFavoriteCourse();
+                userFavorite.CourseId = id;
+                userFavorite.UserId = userId;
+
+                new UserFavoriteCourseRepository().Insert(userFavorite);
+                return Json("1", JsonRequestBehavior.AllowGet);
+            }
+
+            new UserFavoriteCourseRepository().Delete(userFavoriteCourses[0].UserFavoriteCourseId);
+            return Json("0", JsonRequestBehavior.AllowGet);
+        }
     }
 }
