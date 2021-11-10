@@ -38,5 +38,10 @@ namespace EduMax.Repository
             List<Course> courses = context.Courses.SqlQuery(sqlQuery).ToList();
             return courses;
         }
+
+        public Course GetCourseData(int courseId)
+        {
+            return new CourseRepository().Get(courseId);
+        }
     }
 }

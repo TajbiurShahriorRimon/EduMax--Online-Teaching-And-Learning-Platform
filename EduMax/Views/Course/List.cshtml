@@ -53,7 +53,7 @@
                     if (item.Status == "1")
                     {
                         <div class="col-lg-4 col-sm-6 mb-5">
-                            <a href="/Course/CourseLectureList/@item.CourseId">
+                            <a id="@item.CourseId" @*href="/Course/CourseLectureList/@item.CourseId"*@ onclick="CourseLec(@item.CourseId)">
                                 <div class="card p-0 border-primary rounded-0 hover-shadow">
                                     @if (item.CoursePhoto != null)
                                     {
@@ -75,7 +75,7 @@
                                         <div align="right">
                                             @*<object><a onclick="favorite(@item.CourseId)">*@
                                             <object>
-                                            <i id="@item.CourseId" onclick="favorite(@item.CourseId)" style="color: rebeccapurple;" class="ti-heart hover-icon"></i>
+                                            <i id="@("ic"+item.CourseId)" onclick="favorite(@item.CourseId)" style="color: rebeccapurple;" class="ti-heart hover-icon"></i>
                                             </object>
                                             @*<i id="@item.CourseId" onclick="favorite(@item.CourseId)" style="color: rebeccapurple;" class="fas fa-heart hover-icon"></i>*@
                                             @*</a></object>*@
@@ -185,18 +185,32 @@
 </html>
 
 <script type="text/javascript">
+    function CourseLec(id) {
+        alert("Course");
+        if (!$("#ic" + id).click) {
+            alert("Clicked");
+        }
+        var aTag = document.getElementById(id);
+        aTag.href = "/Course/CourseLectureList/" + id;
+        alert("done1");      
+    }
     function favorite(id) {
         var v = document.getElementById(id).value;        
         alert("hello: " + id);
-        alert(v);
-        $("#" + id).removeClass("ti-heart");
-        $("#" + id).addClass("fas fa-heart");
+        //alert(v);
+        //$("#" + id).removeClass("ti-heart");
+        $("#" + id).removeAttr("href");
+        //$("#" + id).addClass("fas fa-heart");        
         $.ajax({
             url: "/Course/UserFavoriteCourse/" + id,
             method: "Get",
             dataType: "json",
+            async: false,
 
             success: function (data) {
+                @*$("#" + id).attr("href");*@
+                $("#" + id).removeAttr("href");
+                return void
                 alert("success");
                 console.log(data);
             },

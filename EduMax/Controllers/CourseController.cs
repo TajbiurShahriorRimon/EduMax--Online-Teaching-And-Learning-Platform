@@ -174,21 +174,48 @@ namespace EduMax.Controllers
             return View(courses);
         }
 
+        //The following method gets called when user Add or Remove a course as Favorite
         public ActionResult UserFavoriteCourse(int id) //Course Id
         {
+            /*If no session for Login is set the user will be redirected to the landing page*/
+            if (Session["user_email"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            //Assigning the user session value
             int userId = (int) Session["credential_id"];
+
+            /*First it has to be checked whether the course is already added to Favorites or not.*/
+            //Now getting the data...
             List<UserFavoriteCourse> userFavoriteCourses = new UserFavoriteCourseRepository().IfCourseIsAddedInFavorite(id, userId);
+
+            /*If the Favorite Course count is zero, then this means that the particular course is not in the Favorite list
+            for that particualar user.*/
             if(userFavoriteCourses.Count == 0)
             {
+                /*Since the particular course is not in the Favorite list for the user, therfore the course has to be added
+                in the UserFavoriteCourse table.*/
                 UserFavoriteCourse userFavorite = new UserFavoriteCourse();
                 userFavorite.CourseId = id;
                 userFavorite.UserId = userId;
 
-                new UserFavoriteCourseRepository().Insert(userFavorite);
+                //Inserting data into UserFavoriteCourse table
+                new UserFavoriteCourseRepository().InsertUserFavoriteCourse(userFavorite); //Passing the data as argument
+                //After inserting, Json data is passed, and an argument "1" is passed as a signal to the ajax call,
+                //which means that user do not have that particular course in the Favorite, but now the course is added in the Favorite List.
                 return Json("1", JsonRequestBehavior.AllowGet);
             }
 
-            new UserFavoriteCourseRepository().Delete(userFavoriteCourses[0].UserFavoriteCourseId);
+            /*If the Favorite Course count is greater zero, then this means that the particular course is in the Favorite list
+            for that particualar user.*/
+
+            /*Since the particular course is in the Favorite list for the user, therfore the course has to be deleted
+            from the UserFavoriteCourse table.*/
+            new UserFavoriteCourseRepository().DeleteUserFavoriteCourse(userFavoriteCourses[0].UserFavoriteCourseId);
+
+            /*After deleting, Json data is passed, and an argument "0" is passed as a signal to the ajax call,
+            which means that user already have that particular course in the Favorite, but now the course is deleted from the Favorite List.*/
             return Json("0", JsonRequestBehavior.AllowGet);
         }
     }

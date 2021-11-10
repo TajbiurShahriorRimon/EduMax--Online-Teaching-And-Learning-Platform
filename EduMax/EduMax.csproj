@@ -139,6 +139,7 @@
     <Compile Include="Controllers\SalesRecordController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserFavoriteCourseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -431,13 +432,13 @@
     <Content Include="Views\Notification\Create.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
     <Content Include="Views\Notification\Get.cshtml" />
+    <Content Include="Views\UserFavoriteCourse\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\CourseImage\" />
     <Folder Include="Files\Lectures\" />
     <Folder Include="Views\Admin\" />
-    <Folder Include="Views\LogOut\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

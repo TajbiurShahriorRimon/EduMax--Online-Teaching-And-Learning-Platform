@@ -15,5 +15,22 @@ namespace EduMax.Repository
             List<UserFavoriteCourse> userFavoriteCourses = this.context.UserFavoriteCourses.SqlQuery(query).ToList();
             return userFavoriteCourses;
         }
+
+        public List<UserFavoriteCourse> List(int userId)
+        {
+            //Select * from UserFavoriteCourse where UserId = userId
+            List<UserFavoriteCourse> userFavoriteCourses = new UserFavoriteCourseRepository().GetAll().Where(x => x.UserId == userId).ToList();
+            return userFavoriteCourses;
+        }
+
+        public void InsertUserFavoriteCourse(UserFavoriteCourse data)
+        {
+            new UserFavoriteCourseRepository().Insert(data);
+        }
+
+        public void DeleteUserFavoriteCourse(int id)
+        {
+            new UserFavoriteCourseRepository().Delete(id);
+        }
     }
 }
