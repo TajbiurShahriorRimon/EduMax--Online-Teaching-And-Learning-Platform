@@ -30,6 +30,7 @@ namespace EduMax.Models
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<ReceiverNotice> ReceiverNotices { get; set; }
         public DbSet<UserFavoriteCourse> UserFavoriteCourses { get; set; }
+        public DbSet<ReviewAndRating> ReviewsAndRatings { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

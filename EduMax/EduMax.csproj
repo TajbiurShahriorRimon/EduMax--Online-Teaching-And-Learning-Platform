@@ -247,6 +247,10 @@
     <Compile Include="Migrations\202111072050042_UserFavoriteCourse_table_added.designer.cs">
       <DependentUpon>202111072050042_UserFavoriteCourse_table_added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111111348476_ReviewsAndRatings.cs" />
+    <Compile Include="Migrations\202111111348476_ReviewsAndRatings.designer.cs">
+      <DependentUpon>202111111348476_ReviewsAndRatings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Assignment.cs" />
@@ -254,6 +258,7 @@
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\ReceiverNotice.cs" />
+    <Compile Include="Models\ReviewAndRating.cs" />
     <Compile Include="Models\SalesRecord.cs" />
     <Compile Include="Models\StudentCourse.cs" />
     <Compile Include="Models\Course.cs" />
@@ -531,6 +536,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111072050042_UserFavoriteCourse_table_added.resx">
       <DependentUpon>202111072050042_UserFavoriteCourse_table_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111111348476_ReviewsAndRatings.resx">
+      <DependentUpon>202111111348476_ReviewsAndRatings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

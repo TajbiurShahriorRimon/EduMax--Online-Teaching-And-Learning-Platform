@@ -85,3 +85,4 @@ D:\Project\EduMax\obj\Debug\EduMax.Migrations.SalesRecord_Invoice_Updated.resour
 D:\Project\EduMax\obj\Debug\EduMax.Migrations.Notifications_relted_Table_Added.resources
 D:\Project\EduMax\obj\Debug\EduMax.Migrations.Notification_ReceiverNotification_Added.resources
 D:\Project\EduMax\obj\Debug\EduMax.Migrations.UserFavoriteCourse_table_added.resources
+D:\Project\EduMax\obj\Debug\EduMax.Migrations.ReviewsAndRatings.resources

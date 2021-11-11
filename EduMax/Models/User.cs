@@ -9,7 +9,7 @@ namespace EduMax.Models
 {
     public class User
     {
-        //Since User table has a one-to-one relationship with Credential table there fore we have to write the following annotation.
+        //Since User table has a one-to-one relationship with Credential table, therefore we have to write the following annotation.
         //Here UserId is both a primary key (which is not auto incremented) and a Foreign Key of Credential Table
         [ForeignKey("Credential")]        
         public int UserId { get; set; }
@@ -30,6 +30,7 @@ namespace EduMax.Models
         public virtual List<Course> Courses { get; set; }
         public virtual List<Invoice> Invoices { get; set; }
         public virtual List<UserFavoriteCourse> UserFavoriteCourses { get; set; }
+        public virtual List<ReviewAndRating> ReviewsAndRatings { get; set; }
 
     }
 }
