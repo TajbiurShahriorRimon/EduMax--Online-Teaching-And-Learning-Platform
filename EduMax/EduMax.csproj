@@ -136,6 +136,7 @@
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\LectureController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\ReviewAndRatingController.cs" />
     <Compile Include="Controllers\SalesRecordController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -280,6 +281,7 @@
     <Compile Include="Repository\NotificationRepository.cs" />
     <Compile Include="Repository\ReceiverNoticeRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Repository\ReviewAndRatingRepository.cs" />
     <Compile Include="Repository\SalesRecordRepository.cs" />
     <Compile Include="Repository\StudentCourseRepository.cs" />
     <Compile Include="Repository\StudentRepository.cs" />
@@ -444,6 +446,7 @@
     <Folder Include="Files\CourseImage\" />
     <Folder Include="Files\Lectures\" />
     <Folder Include="Views\Admin\" />
+    <Folder Include="Views\ReviewAndRating\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

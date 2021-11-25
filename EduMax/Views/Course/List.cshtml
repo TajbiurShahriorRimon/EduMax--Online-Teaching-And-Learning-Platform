@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+    string favSig = "0";
 }
 
 <!DOCTYPE HTML>
@@ -53,7 +54,7 @@
                     if (item.Status == "1")
                     {
                         <div class="col-lg-4 col-sm-6 mb-5">
-                            <a id="@item.CourseId" @*href="/Course/CourseLectureList/@item.CourseId"*@ onclick="CourseLec(@item.CourseId)">
+                            <a id="@item.CourseId" href="/Course/CourseLectureList/@item.CourseId" @*onclick="CourseLec(@item.CourseId)"*@>
                                 <div class="card p-0 border-primary rounded-0 hover-shadow">
                                     @if (item.CoursePhoto != null)
                                     {
@@ -74,18 +75,30 @@
                                         </div>
                                         <div align="right">
                                             @*<object><a onclick="favorite(@item.CourseId)">*@
-                                            <object>
-                                            <i id="@("ic"+item.CourseId)" onclick="favorite(@item.CourseId)" style="color: rebeccapurple;" class="ti-heart hover-icon"></i>
-                                            </object>
-                                            @*<i id="@item.CourseId" onclick="favorite(@item.CourseId)" style="color: rebeccapurple;" class="fas fa-heart hover-icon"></i>*@
-                                            @*</a></object>*@
+                                            @foreach (var userFavoriteCourse in item.UserFavoriteCourses)
+                                            {
+                                                if (userFavoriteCourse.UserId == (int)Session["credential_id"] && userFavoriteCourse.CourseId == item.CourseId)
+                                                {
+                                                    favSig = "1";
+                                                    break;
+                                                }     favSig = "0";
+                                            }
+
+                                            @if (favSig == "0")
+                                            {
+                                                <object>
+                                                    <i id="@("ic"+item.CourseId)" onclick="favorite(@item.CourseId)" style="color: rebeccapurple;" class="ti-heart hover-icon"></i>
+                                                </object>
+                                            }
+                                            else if (favSig == "1")
+                                            {
+                                                <object>
+                                                    <i id="@("ic"+item.CourseId)" onclick="favorite(@item.CourseId)" style="color: rebeccapurple;" class="fas fa-heart hover-icon"></i>
+                                                </object>
+                                                favSig = "0";
+                                            }
                                         </div>                                      
                                     </div>
-                                    @*<div align="right">
-                                        <object>
-                                            <a href="#"><i class="ti-heart ti-heart"></i></a>
-                                        </object>
-                                    </div>*@
                                     
                                     <object>
                                         <a href="/Course/CourseLectureList/@item.CourseId">
@@ -187,31 +200,49 @@
 <script type="text/javascript">
     function CourseLec(id) {
         alert("Course");
-        if (!$("#ic" + id).click) {
-            alert("Clicked");
+        if ($("#ic" + id).click) {
+            //alert("fav clicked");
+            event.preventDefault();
         }
-        var aTag = document.getElementById(id);
-        aTag.href = "/Course/CourseLectureList/" + id;
-        alert("done1");      
+        if ($("#" + id).click) {
+            //alert("Clicked");
+            event.preventDefault();
+            var aTag = document.getElementById(id);
+            aTag.href = "/Course/CourseLectureList/" + id;
+        }   
     }
     function favorite(id) {
-        var v = document.getElementById(id).value;        
-        alert("hello: " + id);
-        //alert(v);
-        //$("#" + id).removeClass("ti-heart");
-        $("#" + id).removeAttr("href");
-        //$("#" + id).addClass("fas fa-heart");        
+        var v = document.getElementById(id).value;
+        if ($("#ic" + id).click(function (event) {
+            event.preventDefault();
+            //alert("hello 23");
+        }));
+
         $.ajax({
             url: "/Course/UserFavoriteCourse/" + id,
             method: "Get",
             dataType: "json",
             async: false,
 
-            success: function (data) {
+            success: function (data) {                
+                //alert("Success");
                 @*$("#" + id).attr("href");*@
-                $("#" + id).removeAttr("href");
-                return void
-                alert("success");
+                //$("#" + id).removeAttr("href");
+                //return void
+                if (data == "1") {
+                    $("#ic" + id).addClass("fas fa-heart");
+                    $("#ic" + id).removeClass("ti-heart");
+                    //alert("Added");
+                    
+                }
+                else {
+                    $("#ic" + id).removeClass("fas fa-heart");
+                    $("#ic" + id).addClass("ti-heart");
+                    //alert("Removed");
+                    
+                }
+                //alert("success");
+                event.preventDefault();
                 console.log(data);
             },
             error: function (data) {

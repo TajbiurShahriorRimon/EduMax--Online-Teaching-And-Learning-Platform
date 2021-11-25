@@ -40,14 +40,17 @@ namespace EduMax.Controllers
                 user.UserId = new CredentialRepository().GetLatestId();
                 new UserRepository().Insert(user);
 
-                return RedirectToAction("Login", "Home");
+                //return RedirectToAction("Login", "Home");
+                //return RedirectToAction("Index", "Credential");
             }
             ViewBag.UserEmail = credential1.Email;
             ViewBag.UserPassword = credential1.Password;
             ViewBag.UserInstitution = credential1.User.Institution;
             ViewBag.UserName = credential1.User.Name;
-            return PartialView("PartialLogin");
+            //return PartialView("PartialLogin");
+            //return RedirectToAction("Index", "Home");
             //return PartialView("~/Views/Home/Index.cshtml");
+            return View();
 
             /*if (formCollection["student"] == "Register as Student")
             {

@@ -37,7 +37,7 @@ namespace EduMax.Controllers
         public ActionResult LogOut()
         {
             Session.Clear();
-            return RedirectToAction("Login");
+            return RedirectToAction("Index");
         }
     }
 }
