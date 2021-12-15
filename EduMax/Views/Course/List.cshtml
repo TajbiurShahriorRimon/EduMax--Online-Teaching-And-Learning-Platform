@@ -4,6 +4,8 @@
 @{
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+
+    //Setting "0" to favSig. This is used as a signal for the user Favorite course for a particular course.
     string favSig = "0";
 }
 
@@ -73,27 +75,39 @@
                                         <div align="left">
                                             <i class="ti-money"><u><strong>@item.Price</strong></u></i>
                                         </div>
+
+                                        @* We have to set the course favorite icon. If the particular course is in user Favorite list then the icon will have
+                                           a colured heart-shape icon else the icon will be a colorless heart-shape icon *@
                                         <div align="right">
-                                            @*<object><a onclick="favorite(@item.CourseId)">*@
                                             @foreach (var userFavoriteCourse in item.UserFavoriteCourses)
                                             {
+                                                @* We have to check every data from the UserFavoriteCourses whether the particular course is a Favorite for
+                                                   the particular user or not. *@
+
                                                 if (userFavoriteCourse.UserId == (int)Session["credential_id"] && userFavoriteCourse.CourseId == item.CourseId)
                                                 {
+                                                    @* If the particular course is a Favorite for the user then the favSig will be "1" meaning the
+                                                       course is user Favorite; and then we have to break the loop. *@
                                                     favSig = "1";
                                                     break;
-                                                }     favSig = "0";
+                                                }
+                                                
+                                                @* If the particular course is a Favorite for the user then the favSig will be "0" meaning the
+                                                       course is user not Favorite. The loop still continues to iterate. *@
+                                                favSig = "0";
                                             }
 
+                                            @* After compeleting/breaking the loop it is now checked whether the favSig is "1" or "0" *@
                                             @if (favSig == "0")
                                             {
                                                 <object>
-                                                    <i id="@("ic"+item.CourseId)" onclick="favorite(@item.CourseId)" style="color: rebeccapurple;" class="ti-heart hover-icon"></i>
+                                                    <i id="@("userFavCourse"+item.CourseId)" onclick="favorite(@item.CourseId)" style="color: rebeccapurple;" class="ti-heart hover-icon"></i>
                                                 </object>
                                             }
                                             else if (favSig == "1")
                                             {
                                                 <object>
-                                                    <i id="@("ic"+item.CourseId)" onclick="favorite(@item.CourseId)" style="color: rebeccapurple;" class="fas fa-heart hover-icon"></i>
+                                                    <i id="@("userFavCourse"+item.CourseId)" onclick="favorite(@item.CourseId)" style="color: rebeccapurple;" class="fas fa-heart hover-icon"></i>
                                                 </object>
                                                 favSig = "0";
                                             }
@@ -197,20 +211,8 @@
 </body>
 </html>
 
-<script type="text/javascript">
-    function CourseLec(id) {
-        alert("Course");
-        if ($("#ic" + id).click) {
-            //alert("fav clicked");
-            event.preventDefault();
-        }
-        if ($("#" + id).click) {
-            //alert("Clicked");
-            event.preventDefault();
-            var aTag = document.getElementById(id);
-            aTag.href = "/Course/CourseLectureList/" + id;
-        }   
-    }
+<script type="text/javascript">    
+
     function favorite(id) {
         var v = document.getElementById(id).value;
         if ($("#ic" + id).click(function (event) {
@@ -229,25 +231,35 @@
                 @*$("#" + id).attr("href");*@
                 //$("#" + id).removeAttr("href");
                 //return void
+
+                /*If data value is "1" then this means the particular course for the particular user is added as Favorite*/
                 if (data == "1") {
-                    $("#ic" + id).addClass("fas fa-heart");
-                    $("#ic" + id).removeClass("ti-heart");
+                    //So, the class will be added and another class will be removed using the help if JQuery.
+                    $("#userFavCourse" + id).addClass("fas fa-heart");
+                    $("#userFavCourse" + id).removeClass("ti-heart");
                     //alert("Added");
                     
                 }
+                /*Else if data value is "0" then this means the particular course for the particular user is removed from Favorite*/
                 else {
-                    $("#ic" + id).removeClass("fas fa-heart");
-                    $("#ic" + id).addClass("ti-heart");
+                    //So, the class will be added and another class will be removed using the help if JQuery.
+                    $("#userFavCourse" + id).removeClass("fas fa-heart");
+                    $("#userFavCourse" + id).addClass("ti-heart");
                     //alert("Removed");
                     
                 }
                 //alert("success");
+
+                //The following line is required. This is because, the favorite icon is inside a a-tag (link). If user clicks on the
+                //Favorite icon, the program will run successfully but it will the redirect to another page which is a work done by that a-tag.
+                //So to stop this, the follwong line is required to stop from redirection.
                 event.preventDefault();
-                console.log(data);
+                //console.log(data);
             },
+            //If any error occurs after the request, then the following line executes.
             error: function (data) {
                 alert("error");
-                alert(data);
+                //alert(data);
             }
         })
     }
